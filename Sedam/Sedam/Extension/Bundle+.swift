@@ -9,24 +9,10 @@ import Foundation
 
 extension Bundle {
     var kakaoKey: String? {
-        guard let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
-              let rawData = try? Data(contentsOf: URL(filePath: path)),
-              let realData = try? PropertyListSerialization.propertyList(from: rawData, format: nil) as? [String: Any],
-              let key = realData["KAKAO_KEY"] as? String else {
-            return nil
-        }
-        
-        return key
+        object(forInfoDictionaryKey: "KakaoKey") as? String
     }
     
     var supabaseKey: String? {
-        guard let path = Bundle.main.path(forResource: "Info", ofType: "plist"),
-              let rawData = try? Data(contentsOf: URL(filePath: path)),
-              let realData = try? PropertyListSerialization.propertyList(from: rawData, format: nil) as? [String: Any],
-              let key = realData["SUPABASE_KEY"] as? String else {
-            return nil
-        }
-        
-        return key
+        object(forInfoDictionaryKey: "SupabaseKey") as? String
     }
 }
