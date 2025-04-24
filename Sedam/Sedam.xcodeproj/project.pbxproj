@@ -63,6 +63,7 @@
 			isa = PBXGroup;
 			children = (
 				92FB14092DB8B96400ABAD64 /* Sedam */,
+				9279F7FD2DBA9F1700C0FD0A /* SedamTests */,
 				92FB14082DB8B96400ABAD64 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -71,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				92FB14072DB8B96400ABAD64 /* Sedam.app */,
+				9279F7FC2DBA9F1700C0FD0A /* SedamTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -78,6 +80,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		9279F7FB2DBA9F1700C0FD0A /* SedamTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9279F8022DBA9F1700C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */;
+			buildPhases = (
+				9279F7F82DBA9F1700C0FD0A /* Sources */,
+				9279F7F92DBA9F1700C0FD0A /* Frameworks */,
+				9279F7FA2DBA9F1700C0FD0A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9279F8012DBA9F1700C0FD0A /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				9279F7FD2DBA9F1700C0FD0A /* SedamTests */,
+			);
+			name = SedamTests;
+			packageProductDependencies = (
+			);
+			productName = SedamTests;
+			productReference = 9279F7FC2DBA9F1700C0FD0A /* SedamTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		92FB14062DB8B96400ABAD64 /* Sedam */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 92FB14122DB8B96600ABAD64 /* Build configuration list for PBXNativeTarget "Sedam" */;
@@ -141,6 +166,7 @@
 			projectRoot = "";
 			targets = (
 				92FB14062DB8B96400ABAD64 /* Sedam */,
+				9279F7FB2DBA9F1700C0FD0A /* SedamTests */,
 			);
 		};
 /* End PBXProject section */
