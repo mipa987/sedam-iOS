@@ -10,11 +10,14 @@ import SwiftUI
 enum SFont {
     enum Name {
         case danjo
+        case pretendard
         
         var file: String {
             switch self {
             case .danjo:
                 "Danjo-bold-Regular"
+            case .pretendard:
+                "Pretendard-SemiBold"
             }
         }
     }
@@ -32,6 +35,13 @@ enum SFont {
 }
 
 extension Font {
+    //danjo
+    static let danjoBold60: Font = .custom(SFont.Name.danjo.file, size: 60)
+    static let danjoBold48: Font = .custom(SFont.Name.danjo.file, size: 48)
     static let danjoBold32: Font = .custom(SFont.Name.danjo.file, size: 32)
+    static let danjoBold18: Font = .custom(SFont.Name.danjo.file, size: 18)
     static let danjoBold14: Font = .custom(SFont.Name.danjo.file, size: 14)
+    
+    //pretendard
+    static let pretendardSemiBold14: Font = .custom(SFont.Name.pretendard.file, size: 14)
 }
