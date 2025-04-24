@@ -14,7 +14,7 @@ enum LogIn: String, CaseIterable {
     var backgroundColor: Color {
         switch self {
         case .kakao:
-            return Color.yellow
+            return Color.kakao
         case .apple:
             return Color.black
         }
@@ -46,6 +46,15 @@ enum LogIn: String, CaseIterable {
             "APPLE"
         }
     }
+    
+    var image: Image {
+        switch self {
+        case .kakao:
+            Image(.kakao)
+        case .apple:
+            Image(.apple)
+        }
+    }
 }
 
 struct LoginButton: View {
@@ -56,16 +65,17 @@ struct LoginButton: View {
     }
     
     var body: some View {
-        MainText(type.title, fontType: .title3, color: type.titleColor)
+        MainText(type.title, fontType: .pretendardSemiBold14, color: type.titleColor)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 15)
             .background(type.backgroundColor)
             .clipShape(RoundedRectangle(cornerRadius: 10))
-//            .overlay(alignment: .leading) {
-//                type.image
-//                    .frame(width: 24, height: 24)
-//                    .padding(.leading, 16)
-//            }
+            .overlay(alignment: .leading) {
+                type.image
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .padding(.leading, 16)
+            }
     }
 }
 
@@ -91,7 +101,7 @@ public struct MainText: View {
 
     public var body: some View {
         Text(title)
-            .font(.danjoBold14)
+            .font(fontType)
             .foregroundStyle(color ?? Color.black)
     }
 }
