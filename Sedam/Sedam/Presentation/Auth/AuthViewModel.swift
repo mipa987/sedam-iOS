@@ -19,6 +19,7 @@ class AuthViewModel {
      
     private var cancellables = Set<AnyCancellable>()
     private let apple = AppleAuthManager()
+    private let kakao = KakaoAuthManager()
 
     var authenticationState: AuthenticationState = .splash
     var loginType: LogIn?
@@ -31,7 +32,9 @@ class AuthViewModel {
         case .checkToken:
             return
         case .kakaoSignIn:
-            return
+            Task {
+                await kakao.trySignInWithKakoa()
+            }
         case .appleSignIn:
             apple.signInWithApple()
             
