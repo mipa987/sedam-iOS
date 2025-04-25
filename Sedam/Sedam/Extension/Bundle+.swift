@@ -8,11 +8,7 @@
 import Foundation
 
 extension Bundle {
-    var kakaoKey: String? {
-        object(forInfoDictionaryKey: "KakaoKey") as? String
-    }
-    
     var supabaseKey: String? {
-        object(forInfoDictionaryKey: "SupabaseKey") as? String
+        object(forInfoDictionaryKey: "SUPABASE_KEY") as? String
     }
 }
