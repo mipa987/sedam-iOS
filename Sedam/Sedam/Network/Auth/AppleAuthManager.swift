@@ -9,9 +9,6 @@ import AuthenticationServices
 import Supabase
 
 final class AppleAuthManager: NSObject, ASAuthorizationControllerDelegate {
-    let supabase = SupabaseClient(
-    )
-    
     func signInWithApple() {
         let request = ASAuthorizationAppleIDProvider().createRequest()
         request.requestedScopes = [.email]
@@ -33,7 +30,7 @@ final class AppleAuthManager: NSObject, ASAuthorizationControllerDelegate {
 
         Task {
             do {
-                let session = try await supabase.auth.signInWithIdToken(
+                let session = try await SupabaseManager.shared.supabase.auth.signInWithIdToken(
                     credentials: .init(provider: .apple, idToken: idToken)
                 )
                 DispatchQueue.main.async {

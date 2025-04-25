@@ -12,26 +12,18 @@ struct LoginView: View {
     
     var body: some View {
         ZStack {
-            Color.ivory
+            Color.modernIvory
                 .ignoresSafeArea()
             
             VStack {
-                VStack(spacing: 4) {
-                    Image(.heartBubble)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                    Image(.squareBubble)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                    Image(.roundBubble)
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                }
-                .padding(.vertical, 36)
+                LogoView(isVertical: true)
+                    .padding(.vertical, 36)
                 Text("세담")
                     .font(.danjoBold48)
+                    .foregroundStyle(.black)
                     .padding(.vertical, 8)
                 Text("매일 적는 3단어 담화")
+                    .foregroundStyle(.black)
                     .font(.danjoBold18)
                 
                 Spacer().frame(height: 80)
@@ -44,7 +36,7 @@ struct LoginView: View {
                                 case .apple:
                                     viewModel.send(action: .appleSignIn)
                                 case .kakao:
-                                    break
+                                    viewModel.send(action: .kakaoSignIn)
                                 }
                             }
                     }
