@@ -16,12 +16,22 @@
 		92FB14D12DBA389C00ABAD64 /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = 92FB14D02DBA389C00ABAD64 /* Supabase */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		9279FF9A2DBBA43A00C0FD0A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 92FB13FF2DB8B96400ABAD64 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 92FB14062DB8B96400ABAD64;
+			remoteInfo = Sedam;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		92FB14072DB8B96400ABAD64 /* Sedam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sedam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		92FB14BA2DB9172D00ABAD64 /* Exceptions for "Sedam" folder in "Sedam" target */ = {
+		9279FFA32DBBACC400C0FD0A /* Exceptions for "Sedam" folder in "Sedam" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -34,7 +44,7 @@
 		92FB14092DB8B96400ABAD64 /* Sedam */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				92FB14BA2DB9172D00ABAD64 /* Exceptions for "Sedam" folder in "Sedam" target */,
+				9279FFA32DBBACC400C0FD0A /* Exceptions for "Sedam" folder in "Sedam" target */,
 			);
 			path = Sedam;
 			sourceTree = "<group>";
@@ -63,7 +73,6 @@
 			isa = PBXGroup;
 			children = (
 				92FB14092DB8B96400ABAD64 /* Sedam */,
-				9279F7FD2DBA9F1700C0FD0A /* SedamTests */,
 				92FB14082DB8B96400ABAD64 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -72,7 +81,6 @@
 			isa = PBXGroup;
 			children = (
 				92FB14072DB8B96400ABAD64 /* Sedam.app */,
-				9279F7FC2DBA9F1700C0FD0A /* SedamTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,25 +90,18 @@
 /* Begin PBXNativeTarget section */
 		9279F7FB2DBA9F1700C0FD0A /* SedamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9279F8022DBA9F1700C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */;
+			buildConfigurationList = 9279FF9C2DBBA43A00C0FD0A /* Build configuration list */;
 			buildPhases = (
-				9279F7F82DBA9F1700C0FD0A /* Sources */,
-				9279F7F92DBA9F1700C0FD0A /* Frameworks */,
-				9279F7FA2DBA9F1700C0FD0A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9279F8012DBA9F1700C0FD0A /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				9279F7FD2DBA9F1700C0FD0A /* SedamTests */,
+				9279FF9B2DBBA43A00C0FD0A /* PBXTargetDependency */,
 			);
 			name = SedamTests;
 			packageProductDependencies = (
 			);
 			productName = SedamTests;
-			productReference = 9279F7FC2DBA9F1700C0FD0A /* SedamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		92FB14062DB8B96400ABAD64 /* Sedam */ = {
@@ -142,6 +143,9 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
+					9279F7FB2DBA9F1700C0FD0A = {
+						TestTargetID = 92FB14062DB8B96400ABAD64;
+					};
 					92FB14062DB8B96400ABAD64 = {
 						CreatedOnToolsVersion = 16.3;
 					};
@@ -191,9 +195,44 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		9279FF9B2DBBA43A00C0FD0A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 92FB14062DB8B96400ABAD64 /* Sedam */;
+			targetProxy = 9279FF9A2DBBA43A00C0FD0A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		9279FF982DBBA3F000C0FD0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 92FB14092DB8B96400ABAD64 /* Sedam */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = SedamTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sedam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sedam";
+			};
+			name = Debug;
+		};
+		9279FF992DBBA3F000C0FD0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 92FB14092DB8B96400ABAD64 /* Sedam */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				PRODUCT_NAME = SedamTests;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sedam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sedam";
+			};
+			name = Release;
+		};
 		92FB14102DB8B96600ABAD64 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 92FB14092DB8B96400ABAD64 /* Sedam */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -258,6 +297,8 @@
 		};
 		92FB14112DB8B96600ABAD64 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 92FB14092DB8B96400ABAD64 /* Sedam */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -315,6 +356,8 @@
 		};
 		92FB14132DB8B96600ABAD64 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 92FB14092DB8B96400ABAD64 /* Sedam */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -346,6 +389,8 @@
 		};
 		92FB14142DB8B96600ABAD64 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReferenceAnchor = 92FB14092DB8B96400ABAD64 /* Sedam */;
+			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -378,6 +423,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9279FF9C2DBBA43A00C0FD0A /* Build configuration list */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9279FF982DBBA3F000C0FD0A /* Debug */,
+				9279FF992DBBA3F000C0FD0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		92FB14022DB8B96400ABAD64 /* Build configuration list for PBXProject "Sedam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
