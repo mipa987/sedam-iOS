@@ -17,7 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		927900092DBBAF6C00C0FD0A /* PBXContainerItemProxy */ = {
+		927901922DBBB63600C0FD0A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 92FB13FF2DB8B96400ABAD64 /* Project object */;
 			proxyType = 1;
@@ -27,7 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		927900052DBBAF6C00C0FD0A /* SedamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SedamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9279018E2DBBB63600C0FD0A /* SedamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SedamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92FB14072DB8B96400ABAD64 /* Sedam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sedam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -47,6 +47,11 @@
 			path = SedamTests;
 			sourceTree = "<group>";
 		};
+		9279018F2DBBB63600C0FD0A /* SedamTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SedamTests;
+			sourceTree = "<group>";
+		};
 		92FB14092DB8B96400ABAD64 /* Sedam */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -58,7 +63,7 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		927900022DBBAF6C00C0FD0A /* Frameworks */ = {
+		9279018B2DBBB63600C0FD0A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -87,6 +92,7 @@
 			children = (
 				92FB14092DB8B96400ABAD64 /* Sedam */,
 				927900062DBBAF6C00C0FD0A /* SedamTests */,
+				9279018F2DBBB63600C0FD0A /* SedamTests */,
 				92FB14082DB8B96400ABAD64 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,7 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				92FB14072DB8B96400ABAD64 /* Sedam.app */,
-				927900052DBBAF6C00C0FD0A /* SedamTests.xctest */,
+				9279018E2DBBB63600C0FD0A /* SedamTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -103,27 +109,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		927900042DBBAF6C00C0FD0A /* SedamTests */ = {
+		9279018D2DBBB63600C0FD0A /* SedamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9279000B2DBBAF6C00C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */;
+			buildConfigurationList = 927901942DBBB63600C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */;
 			buildPhases = (
-				927900012DBBAF6C00C0FD0A /* Sources */,
-				927900022DBBAF6C00C0FD0A /* Frameworks */,
-				927900032DBBAF6C00C0FD0A /* Resources */,
+				9279018A2DBBB63600C0FD0A /* Sources */,
+				9279018B2DBBB63600C0FD0A /* Frameworks */,
+				9279018C2DBBB63600C0FD0A /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9279000A2DBBAF6C00C0FD0A /* PBXTargetDependency */,
+				927901932DBBB63600C0FD0A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				927900062DBBAF6C00C0FD0A /* SedamTests */,
+				9279018F2DBBB63600C0FD0A /* SedamTests */,
 			);
 			name = SedamTests;
 			packageProductDependencies = (
 			);
 			productName = SedamTests;
-			productReference = 927900052DBBAF6C00C0FD0A /* SedamTests.xctest */;
+			productReference = 9279018E2DBBB63600C0FD0A /* SedamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		92FB14062DB8B96400ABAD64 /* Sedam */ = {
@@ -165,7 +171,7 @@
 				LastSwiftUpdateCheck = 1630;
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
-					927900042DBBAF6C00C0FD0A = {
+					9279018D2DBBB63600C0FD0A = {
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = 92FB14062DB8B96400ABAD64;
 					};
@@ -193,13 +199,13 @@
 			projectRoot = "";
 			targets = (
 				92FB14062DB8B96400ABAD64 /* Sedam */,
-				927900042DBBAF6C00C0FD0A /* SedamTests */,
+				9279018D2DBBB63600C0FD0A /* SedamTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		927900032DBBAF6C00C0FD0A /* Resources */ = {
+		9279018C2DBBB63600C0FD0A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -216,7 +222,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		927900012DBBAF6C00C0FD0A /* Sources */ = {
+		9279018A2DBBB63600C0FD0A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -233,15 +239,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		9279000A2DBBAF6C00C0FD0A /* PBXTargetDependency */ = {
+		927901932DBBB63600C0FD0A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 92FB14062DB8B96400ABAD64 /* Sedam */;
-			targetProxy = 927900092DBBAF6C00C0FD0A /* PBXContainerItemProxy */;
+			targetProxy = 927901922DBBB63600C0FD0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		9279000C2DBBAF6C00C0FD0A /* Debug */ = {
+		927901952DBBB63600C0FD0A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -259,7 +265,7 @@
 			};
 			name = Debug;
 		};
-		9279000D2DBBAF6C00C0FD0A /* Release */ = {
+		927901962DBBB63600C0FD0A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -268,6 +274,7 @@
 				DEVELOPMENT_TEAM = BMG3X5CM6G;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "mint-raum.SedamTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -471,11 +478,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9279000B2DBBAF6C00C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */ = {
+		927901942DBBB63600C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9279000C2DBBAF6C00C0FD0A /* Debug */,
-				9279000D2DBBAF6C00C0FD0A /* Release */,
+				927901952DBBB63600C0FD0A /* Debug */,
+				927901962DBBB63600C0FD0A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
