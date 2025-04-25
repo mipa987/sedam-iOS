@@ -10,6 +10,8 @@ import Supabase
 
 final class AppleAuthManager: NSObject, ASAuthorizationControllerDelegate {
     let supabase = SupabaseClient(
+        supabaseURL: URL(string: "https://vjicrnaakktpzutjudae.supabase.co")!,
+        supabaseKey: Bundle.main.supabaseKey ?? ""
     )
     
     func signInWithApple() {
