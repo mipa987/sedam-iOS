@@ -44,11 +44,15 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				"Extension/Bundle+.swift",
+				Models/Comment/Comment.swift,
+				Models/Comment/CommentError.swift,
+				Models/Comment/NewComment.swift,
 				Models/Post/NewPost.swift,
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
 				Network/Supabase/SupabaseManager.swift,
 				Secrets.xcconfig,
+				Services/CommentService.swift,
 				Services/PostService.swift,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;

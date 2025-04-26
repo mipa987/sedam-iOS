@@ -12,8 +12,9 @@ struct TestError: Error {
     let message: String
 }
 
-struct SedamTests {
-    @Test func example() async throws {
+// TODO: supabase 확인후, MOCK 으로 구현
+struct PostTest {
+    func example() async throws {
         // 1. 세션 강제 초기화 (로그아웃)
         try? await SupabaseManager.shared.supabase.auth.signOut()
 
@@ -25,7 +26,7 @@ struct SedamTests {
             throw TestError(message: "❌ 테스트 계정 정보 불러오기 실패 (plist 확인 필요)")
         }
 
-        let postService = PostService()
+        let postService = PostService.shared
 
         let authResponse = try await SupabaseManager.shared.supabase.auth.signIn(
             email: email,

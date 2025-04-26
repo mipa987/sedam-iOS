@@ -9,6 +9,8 @@ import Foundation
 import Supabase
 
 final class PostService {
+    static let shared = PostService()
+
     private let client = SupabaseManager.shared.supabase
     // 모든 post 불러오기
     func fetchAllPosts() async throws -> [Post] {
@@ -66,5 +68,7 @@ final class PostService {
         }
     }
 
-    // 좋아요 수 변경
+    // TODO: 좋아요 수 변경
+    // TODO: Post 삭제하면 댓글 삭제
+    // TODO: 중복 좋아요 수 처리
 }
