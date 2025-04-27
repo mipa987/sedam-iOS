@@ -47,12 +47,16 @@
 				Models/Comment/Comment.swift,
 				Models/Comment/CommentError.swift,
 				Models/Comment/NewComment.swift,
+				Models/Like/Like.swift,
+				Models/Like/LikeError.swift,
+				Models/Like/NewLike.swift,
 				Models/Post/NewPost.swift,
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
 				Network/Supabase/SupabaseManager.swift,
 				Secrets.xcconfig,
 				Services/CommentService.swift,
+				Services/LikeService.swift,
 				Services/PostService.swift,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
