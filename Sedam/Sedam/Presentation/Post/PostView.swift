@@ -28,6 +28,7 @@ struct PostView: View {
                     Text(viewModel.selectedPost?.content ?? "")
                     .font(.danjoBold14)
                     .padding(.horizontal, 20)
+                    LikeButton(color: .tranquility, count: viewModel.selectedPost?.likes ?? 0)
                 }
             }
         }
