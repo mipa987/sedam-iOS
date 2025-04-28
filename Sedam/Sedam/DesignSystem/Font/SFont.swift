@@ -39,9 +39,11 @@ extension Font {
     static let danjoBold60: Font = .custom(SFont.Name.danjo.file, size: 60)
     static let danjoBold48: Font = .custom(SFont.Name.danjo.file, size: 48)
     static let danjoBold32: Font = .custom(SFont.Name.danjo.file, size: 32)
+    static let danjoBold24: Font = .custom(SFont.Name.danjo.file, size: 24)
     static let danjoBold18: Font = .custom(SFont.Name.danjo.file, size: 18)
     static let danjoBold14: Font = .custom(SFont.Name.danjo.file, size: 14)
     
     //pretendard
     static let pretendardSemiBold14: Font = .custom(SFont.Name.pretendard.file, size: 14)
+    static let pretendardSemiBold18: Font = .custom(SFont.Name.pretendard.file, size: 18)
 }
