@@ -21,13 +21,12 @@ struct PostCreateView: View {
             VStack(alignment: .center) {
                 LogoView(size: 10)
                 Text("바람, 강아지, 수건")
-                    .font(.danjoBold18)
+                    .font(.danjoBold14)
+                TextField("제목을 입력하세요.", text: $title)
+                    .font(.danjoBold24)
+                    .multilineTextAlignment(.center)
                 LogoView(size: 10)
                 VStack {
-                    TextField("제목을 입력하세요.", text: $title)
-                        .font(.danjoBold24)
-                        .padding(.horizontal, 28)
-                        .padding(.vertical, 4)
                     ZStack(alignment: .topLeading) {
                         if content.isEmpty {
                             Text("3가지 단어가 모두 들어간 글을 작성해주세요.")
@@ -63,4 +62,5 @@ struct PostCreateView: View {
 
 #Preview {
     PostCreateView(title: "",content: "")
+        .environmentObject(PostViewModel())
 }
