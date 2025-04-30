@@ -33,12 +33,14 @@ class AuthViewModel: ObservableObject {
         case .kakaoSignIn:
             Task {
                 await kakao.trySignInWithKakoa()
+                
+                self.authenticationState = .signIn
             }
         case .appleSignIn:
             apple.signInWithApple()
             
             self.loginType = .apple
-            self.authenticationState = .term
+            self.authenticationState = .signIn
         }
     }
 }

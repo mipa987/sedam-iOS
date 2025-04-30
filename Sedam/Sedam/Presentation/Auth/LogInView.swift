@@ -36,7 +36,6 @@ struct LoginView: View {
                                 switch type {
                                 case .apple:
                                     viewModel.send(action: .appleSignIn)
-//                                    router.post(.main)
                                 case .kakao:
                                     viewModel.send(action: .kakaoSignIn)
                                 }
