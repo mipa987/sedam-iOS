@@ -27,7 +27,7 @@ struct RouterView<Content: View>: View {
             .navigationBarTitle("", displayMode: .inline)
             .navigationBarBackButtonHidden()
             .navigationDestination(for: Router.Route.self) { route in
-                router.view(for: route, auth: authViewModel)
+                router.view(for: route)
             }
         }
         .environmentObject(router)

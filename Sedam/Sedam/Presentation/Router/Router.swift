@@ -11,20 +11,22 @@ final class Router: ObservableObject {
     enum Route: Hashable {
         case authLogin
 //        case main
-//        case createPost
-//        case postDetail(post: Post)
+        case createPost
+        case postDetail(post: Post)
     }
 
     @Published var path = NavigationPath()
     
-    @ViewBuilder func view(for route: Route, auth: AuthViewModel) -> some View {
+    @ViewBuilder func view(for route: Route) -> some View {
         switch route {
         case .authLogin:
             LoginView()
-                .environmentObject(auth)
 //        case .main:
-//            let viewModel = PostViewModel()
-//            MainView(viewModel: viewModel)
+//            MainView()
+        case .createPost:
+            PostCreateView()
+        case .postDetail(let post):
+            PostView(post: post)
         }
     }
     
