@@ -29,7 +29,7 @@ struct LikeButton: View {
                 .font(.danjoBold14)
                 .foregroundStyle(isEnable ? Color.white : color)
         }
-        .frame(width: 150, height: 52)
+        .frame(width: 110, height: 42)
         .background(
             RoundedRectangle(cornerRadius: 10)
                 .foregroundStyle(isEnable ? color : Color.white)
