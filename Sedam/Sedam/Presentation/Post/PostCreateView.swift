@@ -12,11 +12,16 @@ struct PostCreateView: View {
     @EnvironmentObject var viewModel: PostViewModel
     @State var title: String = ""
     @State var content: String = ""
+    @FocusState private var isTextEditorFocused: Bool
     
     var body: some View {
         ZStack {
             Color.modernIvory
                 .ignoresSafeArea()
+                .onTapGesture {
+                    // 2) 배경 터치 시 포커스 해제
+                    isTextEditorFocused = false
+                }
             
             VStack(alignment: .center) {
                 LogoView(size: 10)
@@ -36,6 +41,7 @@ struct PostCreateView: View {
                                 .padding(.horizontal, 28)
                         }
                         TextEditor(text: $content)
+                            .focused($isTextEditorFocused)
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .multilineTextAlignment(.leading)
@@ -50,12 +56,20 @@ struct PostCreateView: View {
                         .padding(.horizontal, 24)
                 )
                 MainButton(title: "등록", font: .pretendardSemiBold18, color: .dadsCoupe)
-                    .padding(.horizontal, 24)
-                    .onTapGesture {
+                    .tap() {
                         viewModel.createNewPost(title: title, content: content)
                     }
+                    .padding(.horizontal, 24)
             }
             Spacer()
+        }
+        .onAppear {
+            viewModel.isCreatedPost = false
+        }
+        .onReceive(viewModel.$isCreatedPost) { isCreated in
+            if isCreated {
+                router.pop()
+            }
         }
     }
 }
