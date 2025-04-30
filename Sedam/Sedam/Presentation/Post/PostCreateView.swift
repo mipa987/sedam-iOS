@@ -57,19 +57,18 @@ struct PostCreateView: View {
                 )
                 MainButton(title: "등록", font: .pretendardSemiBold18, color: .dadsCoupe)
                     .tap() {
-                        viewModel.createNewPost(title: title, content: content)
+                        Task { @MainActor in
+                            do {
+                                try await viewModel.createNewPost(title: title, content: content)
+                                router.pop()
+                            } catch {
+                                print("❌ error: \(error.localizedDescription)")
+                            }
+                        }
                     }
                     .padding(.horizontal, 24)
             }
             Spacer()
-        }
-        .onAppear {
-            viewModel.isCreatedPost = false
-        }
-        .onReceive(viewModel.$isCreatedPost) { isCreated in
-            if isCreated {
-                router.pop()
-            }
         }
     }
 }

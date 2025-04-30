@@ -11,7 +11,6 @@ class PostViewModel: ObservableObject {
     @Published var postList: [Post] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
-    @Published var isCreatedPost: Bool = false
     
     private let postService = PostService.shared
     
@@ -30,30 +29,12 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func createNewPost(title: String, content: String) {
-        errorMessage = nil
-        self.isCreatedPost = false
-        
-        Task { @MainActor in
-            do {
-                try await postService.createPost(title: title, content: content)
-                self.isCreatedPost = true
-            } catch {
-                self.errorMessage = error.localizedDescription
-            }
-        }
+    func createNewPost(title: String, content: String) async throws {
+        try await postService.createPost(title: title, content: content)
     }
     
-    func deletePost(id: UUID) {
-        errorMessage = nil
-        
-        Task { @MainActor in
-            do {
-                try await postService.deletePost(id: id)
-            } catch {
-                self.errorMessage = error.localizedDescription
-            }
-        }
+    func deletePost(id: UUID) async throws {
+        try await postService.deletePost(id: id)
     }
 }
 

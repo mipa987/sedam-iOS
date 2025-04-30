@@ -27,7 +27,14 @@ struct PostView: View {
                     .font(.danjoBold24)
                 LogoView(size: 10)
                 Button {
-                    viewModel.deletePost(id: post.id)
+                    Task { @MainActor in
+                        do {
+                            try await viewModel.deletePost(id: post.id)
+                            router.pop()
+                        } catch {
+                            print("❌ error: \(error.localizedDescription)")
+                        }
+                    }
                 } label: {
                     Image(systemName: "trash")
                         .resizable()
