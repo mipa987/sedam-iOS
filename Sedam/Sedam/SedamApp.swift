@@ -10,24 +10,19 @@ import Supabase
 
 @main
 struct SedamApp: App {
-    @StateObject private var router = Router()
     @StateObject var authViewModel = AuthViewModel()
+    @StateObject private var postViewModel = PostViewModel()
     
     init() {
-        print("▶️ SUPABASE_KEY in bundle:",
-              Bundle.main.object(forInfoDictionaryKey: "SUPABASE_KEY") as Any)
+        print("▶️ SUPABASE_KEY in bundle:", Bundle.main.supabaseKey ?? "Not Found")
         print("▶️ full InfoDictionary:", Bundle.main.infoDictionary ?? [:])
     }
     
     var body: some Scene {
         WindowGroup {
-            let authViewModel = AuthViewModel()
-            
-            RouterView() {
-                LoginView()
-            }
+            AuthView()
             .environmentObject(authViewModel)
-            .environmentObject(router)
+            .environmentObject(postViewModel)
                 
         }
     }

@@ -30,6 +30,7 @@ struct RouterView<Content: View>: View {
                 router.view(for: route)
             }
         }
+        .tint(.black)
         .environmentObject(router)
     }
 }
