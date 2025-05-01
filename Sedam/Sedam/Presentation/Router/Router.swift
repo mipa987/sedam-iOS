@@ -12,23 +12,10 @@ final class Router: ObservableObject {
         case authLogin
 //        case main
         case createPost
-        case postDetail(post: Post)
+        case postDetail(post: Int)
     }
 
     @Published var path = NavigationPath()
-    
-    @ViewBuilder func view(for route: Route) -> some View {
-        switch route {
-        case .authLogin:
-            LoginView()
-//        case .main:
-//            MainView()
-        case .createPost:
-            PostCreateView()
-        case .postDetail(let post):
-            PostView(post: post)
-        }
-    }
     
     func push(_ route: Route) {
         path.append(route)

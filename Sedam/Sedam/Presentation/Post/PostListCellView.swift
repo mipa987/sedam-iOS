@@ -11,7 +11,8 @@ struct PostListCellView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var viewModel: PostViewModel
     @State var rank: String
-    let post: Post
+    @Binding var post: Post
+    var index: Int
     
     var body: some View {
         VStack {
@@ -40,7 +41,7 @@ struct PostListCellView: View {
             .padding(.trailing, 16)
         }
         .onTapGesture {
-            router.push(.postDetail(post: post))
+            router.push(.postDetail(post: index))
         }
     }
 }
