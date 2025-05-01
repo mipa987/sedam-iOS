@@ -27,40 +27,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9279018E2DBBB63600C0FD0A /* SedamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SedamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		92FB14072DB8B96400ABAD64 /* Sedam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sedam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9279018E2DBBB63600C0FD0A /* 세담Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "세담Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		92FB14072DB8B96400ABAD64 /* 세담.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "세담.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		9279FFA32DBBACC400C0FD0A /* Exceptions for "Sedam" folder in "Sedam" target */ = {
+		9279FFA32DBBACC400C0FD0A /* Exceptions for "Sedam" folder in "세담" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
 			);
-			target = 92FB14062DB8B96400ABAD64 /* Sedam */;
+			target = 92FB14062DB8B96400ABAD64 /* 세담 */;
 		};
-		E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "SedamTests" target */ = {
+		E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "세담Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				"Extension/Bundle+.swift",
-				Models/Comment/Comment.swift,
-				Models/Comment/CommentError.swift,
-				Models/Comment/NewComment.swift,
-				Models/Like/Like.swift,
-				Models/Like/LikeError.swift,
-				Models/Like/NewLike.swift,
-				Models/Post/NewPost.swift,
-				Models/Post/Post.swift,
-				Models/Post/PostError.swift,
-				Models/User/UserError.swift,
-				Network/Supabase/SupabaseManager.swift,
 				Secrets.xcconfig,
-				Services/CommentService.swift,
-				Services/LikeService.swift,
-				Services/PostService.swift,
-				Services/UserService.swift,
 			);
-			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
+			target = 9279018D2DBBB63600C0FD0A /* 세담Tests */;
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
@@ -78,8 +62,8 @@
 		92FB14092DB8B96400ABAD64 /* Sedam */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				9279FFA32DBBACC400C0FD0A /* Exceptions for "Sedam" folder in "Sedam" target */,
-				E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "SedamTests" target */,
+				9279FFA32DBBACC400C0FD0A /* Exceptions for "Sedam" folder in "세담" target */,
+				E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "세담Tests" target */,
 			);
 			path = Sedam;
 			sourceTree = "<group>";
@@ -125,8 +109,8 @@
 		92FB14082DB8B96400ABAD64 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				92FB14072DB8B96400ABAD64 /* Sedam.app */,
-				9279018E2DBBB63600C0FD0A /* SedamTests.xctest */,
+				92FB14072DB8B96400ABAD64 /* 세담.app */,
+				9279018E2DBBB63600C0FD0A /* 세담Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -141,9 +125,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9279018D2DBBB63600C0FD0A /* SedamTests */ = {
+		9279018D2DBBB63600C0FD0A /* 세담Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 927901942DBBB63600C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */;
+			buildConfigurationList = 927901942DBBB63600C0FD0A /* Build configuration list for PBXNativeTarget "세담Tests" */;
 			buildPhases = (
 				9279018A2DBBB63600C0FD0A /* Sources */,
 				9279018B2DBBB63600C0FD0A /* Frameworks */,
@@ -157,16 +141,16 @@
 			fileSystemSynchronizedGroups = (
 				9279018F2DBBB63600C0FD0A /* SedamTests */,
 			);
-			name = SedamTests;
+			name = "세담Tests";
 			packageProductDependencies = (
 			);
 			productName = SedamTests;
-			productReference = 9279018E2DBBB63600C0FD0A /* SedamTests.xctest */;
+			productReference = 9279018E2DBBB63600C0FD0A /* 세담Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		92FB14062DB8B96400ABAD64 /* Sedam */ = {
+		92FB14062DB8B96400ABAD64 /* 세담 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 92FB14122DB8B96600ABAD64 /* Build configuration list for PBXNativeTarget "Sedam" */;
+			buildConfigurationList = 92FB14122DB8B96600ABAD64 /* Build configuration list for PBXNativeTarget "세담" */;
 			buildPhases = (
 				92FB14032DB8B96400ABAD64 /* Sources */,
 				92FB14042DB8B96400ABAD64 /* Frameworks */,
@@ -179,7 +163,7 @@
 			fileSystemSynchronizedGroups = (
 				92FB14092DB8B96400ABAD64 /* Sedam */,
 			);
-			name = Sedam;
+			name = "세담";
 			packageProductDependencies = (
 				92FB14A72DB8E90D00ABAD64 /* KeyChainModule */,
 				92FB14C62DBA389C00ABAD64 /* Auth */,
@@ -190,7 +174,7 @@
 				92FB14D02DBA389C00ABAD64 /* Supabase */,
 			);
 			productName = Sedam;
-			productReference = 92FB14072DB8B96400ABAD64 /* Sedam.app */;
+			productReference = 92FB14072DB8B96400ABAD64 /* 세담.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -212,7 +196,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 92FB14022DB8B96400ABAD64 /* Build configuration list for PBXProject "Sedam" */;
+			buildConfigurationList = 92FB14022DB8B96400ABAD64 /* Build configuration list for PBXProject "세담" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -230,8 +214,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				92FB14062DB8B96400ABAD64 /* Sedam */,
-				9279018D2DBBB63600C0FD0A /* SedamTests */,
+				92FB14062DB8B96400ABAD64 /* 세담 */,
+				9279018D2DBBB63600C0FD0A /* 세담Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -273,7 +257,7 @@
 /* Begin PBXTargetDependency section */
 		927901932DBBB63600C0FD0A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 92FB14062DB8B96400ABAD64 /* Sedam */;
+			target = 92FB14062DB8B96400ABAD64 /* 세담 */;
 			targetProxy = 927901922DBBB63600C0FD0A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -304,7 +288,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sedam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sedam";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/세담.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/세담";
 			};
 			name = Debug;
 		};
@@ -334,7 +318,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sedam.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Sedam";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/세담.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/세담";
 			};
 			name = Release;
 		};
@@ -544,7 +528,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		927901942DBBB63600C0FD0A /* Build configuration list for PBXNativeTarget "SedamTests" */ = {
+		927901942DBBB63600C0FD0A /* Build configuration list for PBXNativeTarget "세담Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				927901952DBBB63600C0FD0A /* Debug */,
@@ -553,7 +537,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92FB14022DB8B96400ABAD64 /* Build configuration list for PBXProject "Sedam" */ = {
+		92FB14022DB8B96400ABAD64 /* Build configuration list for PBXProject "세담" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92FB14102DB8B96600ABAD64 /* Debug */,
@@ -562,7 +546,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		92FB14122DB8B96600ABAD64 /* Build configuration list for PBXNativeTarget "Sedam" */ = {
+		92FB14122DB8B96600ABAD64 /* Build configuration list for PBXNativeTarget "세담" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				92FB14132DB8B96600ABAD64 /* Debug */,
