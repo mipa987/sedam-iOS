@@ -9,7 +9,7 @@ import SwiftUI
 
 struct RouterView<Content: View>: View {
     @StateObject var router: Router = Router()
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var postViewModel: PostViewModel
     
     private let content: Content
     
@@ -21,14 +21,21 @@ struct RouterView<Content: View>: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            VStack {
-                content
-            }
-            .navigationBarTitle("", displayMode: .inline)
-            .navigationBarBackButtonHidden()
-            .navigationDestination(for: Router.Route.self) { route in
-                router.view(for: route)
-            }
+            content
+                .navigationDestination(for: Router.Route.self) { route in
+                    switch route {
+                    case .authLogin:
+                        LoginView()
+                        //        case .main:
+                        //            MainView()
+                    case .createPost:
+                        PostCreateView()
+                    case .postDetail(let index):
+                        PostView(post: $postViewModel.postList[index])
+                    }
+                }
+                .navigationBarTitle("", displayMode: .inline)
+                .navigationBarBackButtonHidden()
         }
         .tint(.black)
         .environmentObject(router)

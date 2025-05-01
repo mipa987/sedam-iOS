@@ -31,13 +31,11 @@ struct MainView: View {
                     
                     // 4) 남은 공간은 스크롤뷰로 채움
                     ScrollView {
-                        ForEach(indexedPosts, id: \.element.id) { item in
-                            let idx = item.offset
-                            let post = item.element
-                            
+                        ForEach($viewModel.postList.indices, id: \.self) { index in
                             PostListCellView(
-                                rank: String(idx + 1),
-                                post: post
+                                rank: String(index + 1),
+                                post: $viewModel.postList[index],
+                                index: index
                             )
                         }
                         .padding(.horizontal, 16)

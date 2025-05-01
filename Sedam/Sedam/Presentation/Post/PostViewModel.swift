@@ -13,6 +13,7 @@ class PostViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     private let postService = PostService.shared
+    private let likeService = LikeService.shared
     
     func fetchPostList() {
         isLoading = true
@@ -35,6 +36,18 @@ class PostViewModel: ObservableObject {
     
     func deletePost(id: UUID) async throws {
         try await postService.deletePost(id: id)
+    }
+    
+    func tapLike(id: UUID, isLiked: Bool) async throws {
+        if isLiked {
+            try await likeService.unlike(postId: id)
+        } else {
+            try await likeService.like(postId: id)
+        }
+    }
+    
+    func isLiked(id: UUID) async throws -> Bool {
+        try await likeService.hasLiked(postId: id)
     }
 }
 
