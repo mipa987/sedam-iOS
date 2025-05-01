@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LoginView: View {
-    @Binding var viewModel: AuthViewModel
+    @EnvironmentObject var router: Router
+    @EnvironmentObject var viewModel: AuthViewModel
     
     var body: some View {
         ZStack {
@@ -47,7 +48,7 @@ struct LoginView: View {
     }
 }
 
-#Preview {
-    @Previewable @State var authVM = AuthViewModel()
-    LoginView(viewModel: $authVM)
-}
+//#Preview {
+//    @Previewable @State var authVM = AuthViewModel()
+//    LoginView(viewModel: authVM)
+//}

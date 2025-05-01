@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -15,6 +17,12 @@
 			</array>
 		</dict>
 	</array>
+	<key>SUPABASE_KEY</key>
+	<string>$(SUPABASE_KEY)</string>
+	<key>TEST_EMAIL</key>
+	<string>$(TEST_EMAIL)</string>
+	<key>TEST_PASSWORD</key>
+	<string>$(TEST_PASSWORD)</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Pretendard-SemiBold.otf</string>
