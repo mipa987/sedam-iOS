@@ -42,6 +42,7 @@
 		E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "SedamTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Enums/PostOrder.swift,
 				"Extension/Bundle+.swift",
 				Models/Comment/Comment.swift,
 				Models/Comment/CommentError.swift,
@@ -53,6 +54,7 @@
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
 				Models/User/UserError.swift,
+				Models/Post/UpdatePostPayload.swift,
 				Network/Supabase/SupabaseManager.swift,
 				Secrets.xcconfig,
 				Services/CommentService.swift,
@@ -292,7 +294,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = BMG3X5CM6G;
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MACH_O_TYPE = mh_bundle;
 				MARKETING_VERSION = 1.0;
@@ -300,7 +301,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = MipaTest;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -321,7 +321,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = BMG3X5CM6G;
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				MACH_O_TYPE = mh_bundle;
 				MARKETING_VERSION = 1.0;
@@ -330,7 +329,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = MipaTest;
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
