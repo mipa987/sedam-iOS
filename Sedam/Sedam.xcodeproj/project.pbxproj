@@ -29,7 +29,6 @@
 /* Begin PBXFileReference section */
 		9279018E2DBBB63600C0FD0A /* SedamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SedamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92FB14072DB8B96400ABAD64 /* Sedam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sedam.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		E16D5CDB2DBBCFDC004F5713 /* Sedam.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Sedam.xctestplan; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -47,13 +46,19 @@
 				Models/Comment/Comment.swift,
 				Models/Comment/CommentError.swift,
 				Models/Comment/NewComment.swift,
+				Models/Like/Like.swift,
+				Models/Like/LikeError.swift,
+				Models/Like/NewLike.swift,
 				Models/Post/NewPost.swift,
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
+				Models/User/UserError.swift,
 				Network/Supabase/SupabaseManager.swift,
 				Secrets.xcconfig,
 				Services/CommentService.swift,
+				Services/LikeService.swift,
 				Services/PostService.swift,
+				Services/UserService.swift,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
 		};
@@ -109,10 +114,10 @@
 		92FB13FE2DB8B96400ABAD64 = {
 			isa = PBXGroup;
 			children = (
-				E16D5CDB2DBBCFDC004F5713 /* Sedam.xctestplan */,
 				92FB14092DB8B96400ABAD64 /* Sedam */,
 				927900062DBBAF6C00C0FD0A /* SedamTests */,
 				9279018F2DBBB63600C0FD0A /* SedamTests */,
+				E174C3D52DBE4CAE0064CEB8 /* Frameworks */,
 				92FB14082DB8B96400ABAD64 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -124,6 +129,13 @@
 				9279018E2DBBB63600C0FD0A /* SedamTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E174C3D52DBE4CAE0064CEB8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -273,17 +285,22 @@
 			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5JL2D846G3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = BMG3X5CM6G;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				MACH_O_TYPE = mh_bundle;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "mint-raum.SedamTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sedam.mipa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = MipaTest;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -297,18 +314,23 @@
 			baseConfigurationReferenceRelativePath = Secrets.xcconfig;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 5JL2D846G3;
+				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = BMG3X5CM6G;
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
 				GENERATE_INFOPLIST_FILE = YES;
+				MACH_O_TYPE = mh_bundle;
 				MARKETING_VERSION = 1.0;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "mint-raum.SedamTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.sedam.mipa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = MipaTest;
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -463,6 +485,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -501,6 +524,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
