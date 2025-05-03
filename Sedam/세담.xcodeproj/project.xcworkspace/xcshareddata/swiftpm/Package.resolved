@@ -1,15 +1,6 @@
 {
-  "originHash" : "c2b333abfaf7b6e24bf7a2ac96a27459bf03cd92762347d15e9fa39f0aa53af8",
+  "originHash" : "497b223336ae156cc4edd8c12c3d176b975452a34540e6bdf0a3cf91a248bc9c",
   "pins" : [
-    {
-      "identity" : "keychainmodule",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/mint3382/KeyChainModule.git",
-      "state" : {
-        "revision" : "549ecb733e19694108235ade18067e84fa8fee45",
-        "version" : "1.0.2"
-      }
-    },
     {
       "identity" : "supabase-swift",
       "kind" : "remoteSourceControl",

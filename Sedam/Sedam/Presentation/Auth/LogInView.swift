@@ -35,9 +35,9 @@ struct LoginView: View {
                             .onTapGesture {
                                 switch type {
                                 case .apple:
-                                    viewModel.send(action: .appleSignIn)
+                                    viewModel.send(type: .apple)
                                 case .kakao:
-                                    viewModel.send(action: .kakaoSignIn)
+                                    viewModel.send(type: .kakao)
                                 }
                             }
                     }

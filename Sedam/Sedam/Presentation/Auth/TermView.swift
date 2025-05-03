@@ -17,7 +17,7 @@ struct TermView: View {
         .overlay(alignment: .bottom) {
             MainButton(title: "동의", font: .pretendardSemiBold18, color: .dadsCoupe)
                 .tap {
-                    viewModel.send(type: viewModel.loginType ?? .apple)
+                    viewModel.logIn()
                 }
                 .padding(.horizontal, 24)
         }
