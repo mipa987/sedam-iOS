@@ -53,6 +53,7 @@
 				Models/Post/NewPost.swift,
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
+				Models/TodayWord/TodayWord.swift,
 				Models/User/UserError.swift,
 				Models/Post/UpdatePostPayload.swift,
 				Network/Supabase/SupabaseManager.swift,
@@ -60,7 +61,15 @@
 				Services/CommentService.swift,
 				Services/LikeService.swift,
 				Services/PostService.swift,
+				Services/TodayWordService.swift,
 				Services/UserService.swift,
+			);
+			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
+		};
+		E1E0BCE82DC0B76A00B9A607 /* Exceptions for "SedamTests" folder in "SedamTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				TodayWordsTest.swift,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
 		};
@@ -69,6 +78,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		927900062DBBAF6C00C0FD0A /* SedamTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E1E0BCE82DC0B76A00B9A607 /* Exceptions for "SedamTests" folder in "SedamTests" target */,
+			);
 			path = SedamTests;
 			sourceTree = "<group>";
 		};
