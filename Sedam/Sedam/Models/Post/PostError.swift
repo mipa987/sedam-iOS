@@ -11,5 +11,4 @@ enum PostError: Error {
     case notLoggedIn
     case creationFailed(reason: String?)
     case deletionFailed(reason: String?)
-    case updateFailed(reason: String?)
 }
