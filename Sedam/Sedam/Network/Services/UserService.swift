@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DeleteUserRequest: Encodable {
+struct DeleteUserRequest: Codable {
     let user_id: UUID
 }
 

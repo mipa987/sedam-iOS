@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct NewPost: Encodable {
+struct NewPost: Codable {
     var userId: UUID
     var title: String
     var content: String

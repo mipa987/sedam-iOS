@@ -28,6 +28,7 @@
 /* Begin PBXFileReference section */
 		9279018E2DBBB63600C0FD0A /* 세담Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "세담Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		92FB14072DB8B96400ABAD64 /* 세담.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "세담.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E10C920D2DC7AA6C000B245B /* Testing.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Testing.framework; path = Platforms/iPhoneOS.platform/Developer/Library/Frameworks/Testing.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -38,9 +39,41 @@
 			);
 			target = 92FB14062DB8B96400ABAD64 /* 세담 */;
 		};
+		E10C920C2DC79CDD000B245B /* Exceptions for "SedamTests" folder in "세담" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				PostTest.swift,
+			);
+			target = 92FB14062DB8B96400ABAD64 /* 세담 */;
+		};
 		E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "세담Tests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Enums/PostOrder.swift,
+				Enums/TermName.swift,
+				"Extension/Bundle+.swift",
+				Models/Comment/Comment.swift,
+				Models/Comment/CommentError.swift,
+				Models/Comment/NewComment.swift,
+				Models/Like/Like.swift,
+				Models/Like/LikeError.swift,
+				Models/Like/NewLike.swift,
+				Models/Post/NewPost.swift,
+				Models/Post/Post.swift,
+				Models/Post/PostError.swift,
+				Models/Post/UpdatePostPayload.swift,
+				Models/Term/TermError.swift,
+				Models/Term/Terms.swift,
+				Models/Term/UserTerm.swift,
+				Models/TodayWord/TodayWord.swift,
+				Models/User/UserError.swift,
+				Network/Services/CommentService.swift,
+				Network/Services/LikeService.swift,
+				Network/Services/PostService.swift,
+				Network/Services/TermsService.swift,
+				Network/Services/TodayWordService.swift,
+				Network/Services/UserService.swift,
+				Network/Supabase/SupabaseManager.swift,
 				Secrets.xcconfig,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* 세담Tests */;
@@ -55,6 +88,9 @@
 		};
 		9279018F2DBBB63600C0FD0A /* SedamTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E10C920C2DC79CDD000B245B /* Exceptions for "SedamTests" folder in "세담" target */,
+			);
 			path = SedamTests;
 			sourceTree = "<group>";
 		};
@@ -116,6 +152,7 @@
 		E174C3D52DBE4CAE0064CEB8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E10C920D2DC7AA6C000B245B /* Testing.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -358,6 +395,7 @@
 				DEVELOPMENT_TEAM = BMG3X5CM6G;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -424,6 +462,7 @@
 				DEVELOPMENT_TEAM = BMG3X5CM6G;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTING_SEARCH_PATHS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;

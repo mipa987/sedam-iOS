@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct NewLike: Encodable {
+struct NewLike: Codable {
     let postId: UUID
     let userId: UUID
 
