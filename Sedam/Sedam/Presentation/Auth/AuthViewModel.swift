@@ -9,8 +9,7 @@ import Combine
 import SwiftUI
 import KeyChainModule
 
-@Observable
-class AuthViewModel {
+class AuthViewModel: ObservableObject {
      enum Action {
          case kakaoSignIn
          case appleSignIn
@@ -21,10 +20,10 @@ class AuthViewModel {
     private let apple = AppleAuthManager()
     private let kakao = KakaoAuthManager()
 
-    var authenticationState: AuthenticationState = .splash
-    var loginType: LogIn?
-    var userEmail: String?
-    var isLoggedIn = false
+    @Published var authenticationState: AuthenticationState = .splash
+    @Published var loginType: LogIn?
+    @Published var userEmail: String?
+    @Published var isLoggedIn = false
     
     @MainActor
     func send(action: Action) {
@@ -34,12 +33,14 @@ class AuthViewModel {
         case .kakaoSignIn:
             Task {
                 await kakao.trySignInWithKakoa()
+                
+                self.authenticationState = .signIn
             }
         case .appleSignIn:
             apple.signInWithApple()
             
             self.loginType = .apple
-            self.authenticationState = .term
+            self.authenticationState = .signIn
         }
     }
 }

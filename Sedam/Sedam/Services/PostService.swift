@@ -13,11 +13,11 @@ final class PostService {
 
     private let client = SupabaseManager.shared.supabase
     // 모든 post 불러오기
-    func fetchAllPosts() async throws -> [Post] {
+    func fetchAllPosts(orderBy: PostOrder = .latest) async throws -> [Post] {
         try await client
             .from("posts")
             .select()
-            .order("likes", ascending: false)
+            .order(orderBy.rawValue, ascending: false)
             .execute()
             .value
     }
@@ -29,6 +29,20 @@ final class PostService {
             .select()
             .eq("id", value: id.uuidString)
             .single()
+            .execute()
+            .value
+    }
+
+    func fetchMyPosts(orderBy: PostOrder = .latest) async throws -> [Post] {
+        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
+            throw PostError.notLoggedIn
+        }
+
+        return try await client
+            .from("posts")
+            .select()
+            .eq("user_id", value: userId)
+            .order(orderBy.rawValue, ascending: false)
             .execute()
             .value
     }
@@ -65,6 +79,29 @@ final class PostService {
 
         guard (200 ... 299).contains(response.status) else {
             throw PostError.deletionFailed(reason: response.string())
+        }
+    }
+
+    func updatePost(id: UUID, title: String, content: String) async throws {
+        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
+            throw PostError.notLoggedIn
+        }
+
+        let updatePayload = UpdatePostPayload(
+            title: title,
+            content: content,
+            updated_at: ISO8601DateFormatter().string(from: Date())
+        )
+
+        let response = try await client
+            .from("posts")
+            .update(updatePayload)
+            .eq("id", value: id.uuidString)
+            .eq("user_id", value: userId) // 🔒 작성자 본인만 수정 가능
+            .execute()
+
+        guard (200 ... 299).contains(response.status) else {
+            throw PostError.updateFailed(reason: response.string())
         }
     }
 
