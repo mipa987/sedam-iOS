@@ -14,7 +14,7 @@ struct TestError: Error {
 
 // TODO: supabase 확인후, MOCK 으로 구현
 struct PostTest {
-    func example() async throws {
+    @Test func example() async throws {
         // 1. 세션 강제 초기화 (로그아웃)
         try? await SupabaseManager.shared.supabase.auth.signOut()
 
@@ -57,7 +57,49 @@ struct PostTest {
             }
             print("✅ 생성한 포스트 찾음: \(createdPost.id)")
 
-            // 5. post 삭제 테스트
+            // 5. 내 포스트 조회 테스트
+            do {
+                let myPosts = try await postService.fetchMyPosts()
+                #expect(myPosts.contains(where: { $0.title == title }), "❌ 내 포스트 목록에 생성한 포스트가 없음")
+                print("✅ 내 포스트 조회 성공, 총 \(myPosts.count)개")
+            } catch {
+                throw TestError(message: "❌ 내 포스트 조회 실패: \(error.localizedDescription)")
+            }
+
+            // 5. post 수정 테스트
+            let updatedTitle = "Updated Title"
+            let updatedContent = "Updated Content"
+            do {
+                try await postService.updatePost(id: createdPost.id, title: updatedTitle, content: updatedContent)
+                print("✅ 포스트 수정 성공")
+
+                let updatedPost = try await postService.fetchPost(by: createdPost.id)
+                #expect(updatedPost.title == updatedTitle, "❌ 제목 수정 안 됨")
+                #expect(updatedPost.content == updatedContent, "❌ 내용 수정 안 됨")
+                print("✅ 포스트 수정 결과 확인 완료")
+            } catch {
+                throw TestError(message: "❌ 포스트 수정 실패: \(error.localizedDescription)")
+            }
+
+            // 6. 좋아요 순 정렬 테스트
+            do {
+                let sortedPosts = try await postService.fetchAllPosts(orderBy: .popular)
+                #expect(!sortedPosts.isEmpty, "❌ 좋아요순 정렬 실패 또는 결과 없음")
+                print("✅ 좋아요순 정렬 성공, 첫 포스트: \(sortedPosts.first!.id) \(sortedPosts.first!.likes)")
+            } catch {
+                throw TestError(message: "❌ 좋아요순 정렬 테스트 실패: \(error.localizedDescription)")
+            }
+
+            // 7. 최신순  정렬 테스트
+            do {
+                let sortedPosts = try await postService.fetchAllPosts(orderBy: .latest)
+                #expect(!sortedPosts.isEmpty, "❌ 최신순 정렬 실패 또는 결과 없음")
+                print("✅ 최신순 정렬 성공, 첫 포스트: \(sortedPosts.first!.id) \(sortedPosts.first!.likes)")
+            } catch {
+                throw TestError(message: "❌ 최신순 정렬 테스트 실패: \(error.localizedDescription)")
+            }
+
+            // 7. post 삭제 테스트
             do {
                 try await postService.deletePost(id: createdPost.id)
                 print("✅ 생성한 포스트 삭제 성공:", createdPost.id)
