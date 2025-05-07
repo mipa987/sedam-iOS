@@ -22,6 +22,7 @@ struct AuthenticatedView: View {
                     TabContainerView()
                 }
                 .environmentObject(postViewModel)
+                .environmentObject(authViewModel)
             case .term:
                 TermView()
                     .environmentObject(authViewModel)
