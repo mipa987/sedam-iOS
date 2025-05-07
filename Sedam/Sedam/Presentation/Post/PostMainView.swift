@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MainView: View {
+struct PostMainView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     
@@ -58,6 +58,6 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    PostMainView()
         .environmentObject(PostViewModel())
 }

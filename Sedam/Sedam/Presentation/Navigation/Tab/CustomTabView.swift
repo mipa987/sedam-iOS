@@ -67,6 +67,6 @@ struct CustomTabView: View {
 }
 
 #Preview {
-    @State var tab = Tab.myPage
+    @Previewable @State var tab = Tab.myPage
         CustomTabView(selectedTab: $tab)
 }

@@ -17,9 +17,9 @@ struct TabContainerView: View {
             Group {
                 switch selectedTab {
                 case .home:
-                    MainView()
+                    PostMainView()
                 case .myPage:
-                    ContentView()
+                    MyPageView()
                 case .createPost:
                     // + 버튼 누르면 라우터로 push
                     Color.clear
