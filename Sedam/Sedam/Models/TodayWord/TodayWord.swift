@@ -10,11 +10,9 @@ import Foundation
 struct TodayWord: Codable {
     let id: UUID
     let word: String
-    let wordDate: Date
 
     enum CodingKeys: String, CodingKey {
         case id
         case word
-        case wordDate = "word_date"
     }
 }

@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct NewComment: Encodable {
+struct NewComment: Codable {
     var userId: UUID
     var postId: UUID
     var content: String

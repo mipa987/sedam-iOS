@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct UpdatePostPayload: Encodable {
+struct UpdatePostPayload: Codable {
     let title: String
     let content: String
     let updated_at: String

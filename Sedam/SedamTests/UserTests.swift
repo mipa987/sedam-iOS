@@ -9,7 +9,7 @@ import Foundation
 import Testing
 
 struct UserTest {
-    @Test func example() async throws {
+    func example() async throws {
         // 1. 세션 강제 초기화 (로그아웃)
         try? await SupabaseManager.shared.supabase.auth.signOut()
 

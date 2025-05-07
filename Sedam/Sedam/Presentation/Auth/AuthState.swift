@@ -11,8 +11,6 @@ import Foundation
 enum AuthenticationState {
     case splash
     case signIn
-    case nickname
     case term
-    case needToToken
     case guest
 }
