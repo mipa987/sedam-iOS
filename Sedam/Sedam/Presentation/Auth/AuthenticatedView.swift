@@ -8,24 +8,23 @@
 import SwiftUI
 
 struct AuthenticatedView: View {
-    @StateObject var authViewModel: AuthViewModel = AuthViewModel()
+    @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
     @StateObject private var postViewModel: PostViewModel = PostViewModel()
+    @StateObject private var wordViewModel: WordViewModel = WordViewModel()
     
     var body: some View {
         VStack {
             switch authViewModel.authenticationState {
             case .splash:
                 LoginView()
-                    .environmentObject(authViewModel)
             case .signIn:
                 RouterView {
                     TabContainerView()
                 }
                 .environmentObject(postViewModel)
-                .environmentObject(authViewModel)
+                .environmentObject(wordViewModel)
             case .term:
                 TermView()
-                    .environmentObject(authViewModel)
             case .guest:
                 RouterView {
                     TabContainerView()
@@ -33,5 +32,6 @@ struct AuthenticatedView: View {
                 .environmentObject(postViewModel)
             }
         }
+        .environmentObject(authViewModel)
     }
 }

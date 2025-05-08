@@ -8,16 +8,19 @@
 import SwiftUI
 
 struct ThemeView: View {
-    var themes: [String] = ["바람", "강아지", "물티슈"]
+    @EnvironmentObject var wordViewModel: WordViewModel
     
     var body: some View {
         VStack(spacing: 8) {
             Text("오늘의 3단어")
                 .font(.danjoBold14)
-            Text(themes.joined(separator: ", "))
+            Text(wordViewModel.words.joined(separator: ", "))
                 .font(.danjoBold18)
         }
         .foregroundStyle(.black)
+        .onAppear {
+            wordViewModel.getTodayWords()
+        }
     }
 }
 
