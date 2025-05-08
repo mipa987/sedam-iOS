@@ -10,6 +10,7 @@ import SwiftUI
 struct PostCreateView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var wordViewModel: WordViewModel
     @State var title: String = ""
     @State var content: String = ""
     @FocusState private var isTextEditorFocused: Bool
@@ -25,7 +26,7 @@ struct PostCreateView: View {
             
             VStack(alignment: .center) {
                 LogoView(size: 10)
-                Text("바람, 강아지, 수건")
+                Text(wordViewModel.words.joined(separator: ", "))
                     .font(.danjoBold14)
                 TextField("제목을 입력하세요.", text: $title)
                     .font(.danjoBold24)
