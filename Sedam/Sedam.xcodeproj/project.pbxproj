@@ -27,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		9279018E2DBBB63600C0FD0A /* SedamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SedamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		92A0B3C62DCCB2BE009A3A7B /* SedamTests.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = SedamTests.xctestplan; sourceTree = "<group>"; };
 		92FB14072DB8B96400ABAD64 /* Sedam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sedam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -115,6 +116,7 @@
 		92FB13FE2DB8B96400ABAD64 = {
 			isa = PBXGroup;
 			children = (
+				92A0B3C62DCCB2BE009A3A7B /* SedamTests.xctestplan */,
 				92FB14092DB8B96400ABAD64 /* Sedam */,
 				927900062DBBAF6C00C0FD0A /* SedamTests */,
 				9279018F2DBBB63600C0FD0A /* SedamTests */,

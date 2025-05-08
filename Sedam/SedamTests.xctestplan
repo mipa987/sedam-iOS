@@ -1,7 +1,7 @@
 {
   "configurations" : [
     {
-      "id" : "FFEB54B2-BDA3-479B-A764-01DF111D3D23",
+      "id" : "838B29EB-0408-43A4-9B23-1597625869D8",
       "name" : "Test Scheme Action",
       "options" : {
 
@@ -9,7 +9,11 @@
     }
   ],
   "defaultOptions" : {
-
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Sedam.xcodeproj",
+      "identifier" : "92FB14062DB8B96400ABAD64",
+      "name" : "Sedam"
+    }
   },
   "testTargets" : [
     {
