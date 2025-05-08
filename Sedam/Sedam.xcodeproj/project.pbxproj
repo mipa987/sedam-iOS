@@ -41,6 +41,8 @@
 		E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "SedamTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Enums/PostOrder.swift,
+				Enums/TermName.swift,
 				"Extension/Bundle+.swift",
 				Models/Comment/Comment.swift,
 				Models/Comment/CommentError.swift,
@@ -52,6 +54,12 @@
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
 				Models/User/UserError.swift,
+				Network/Services/CommentService.swift,
+				Network/Services/LikeService.swift,
+				Network/Services/PostService.swift,
+				Network/Services/TermsService.swift,
+				Network/Services/TodayWordService.swift,
+				Network/Services/UserService.swift,
 				Network/Supabase/SupabaseManager.swift,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
