@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserCardView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var router: Router
     
     var body: some View {
         VStack {
@@ -20,32 +20,20 @@ struct UserCardView: View {
                     .foregroundStyle(.white)
             }
             Divider()
-            HStack {
-                Button {
-                    authViewModel.logOut()
-                } label: {
-                    Text("로그아웃")
-                        .font(.danjoBold18)
-                        .foregroundStyle(.white)
-                }
-                Divider()
-                Button {
-                    authViewModel.signOut()
-                } label: {
-                    Text("탈퇴하기")
-                        .font(.danjoBold18)
-                        .foregroundStyle(.white)
-                }
+            Button {
+                router.push(.myPostList)
+            } label: {
+                Text("내 글 목록")
+                    .font(.danjoBold18)
+                    .foregroundStyle(.white)
             }
+            
         }
-        .padding()
+        .padding(.vertical, 16)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(.juniperBerries)
-                .shadow(color: .black.opacity(0.1),
-                        radius: 4, x: 0, y: 2)
         )
-        .padding()
-        .frame(height: 150)
+        .frame(maxWidth: .infinity)
     }
 }

@@ -24,7 +24,7 @@ struct AuthenticatedView: View {
                 .environmentObject(postViewModel)
                 .environmentObject(wordViewModel)
             case .term:
-                TermView()
+                TermView(isButtonEnabled: true)
             case .guest:
                 RouterView {
                     TabContainerView()

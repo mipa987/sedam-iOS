@@ -9,6 +9,7 @@ import SwiftUI
 
 class PostViewModel: ObservableObject {
     @Published var postList: [Post] = []
+    @Published var myPostList: [Post] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     
@@ -27,6 +28,21 @@ class PostViewModel: ObservableObject {
                 self.errorMessage = error.localizedDescription
             }
             self.isLoading = false
+        }
+    }
+    
+    @MainActor
+    func fetchMyPostList() {
+        isLoading = true
+        errorMessage = nil
+        
+        Task { 
+            do {
+                let loaded = try await postService.fetchMyPosts()
+                self.myPostList = loaded
+            } catch {
+                self.errorMessage = error.localizedDescription
+            }
         }
     }
     
