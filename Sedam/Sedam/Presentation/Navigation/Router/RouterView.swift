@@ -26,8 +26,8 @@ struct RouterView<Content: View>: View {
                     switch route {
                     case .authLogin:
                         LoginView()
-                        //        case .main:
-                        //            MainView()
+                    case .personalTerm:
+                        TermView()
                     case .createPost:
                         PostCreateView()
                     case .postDetail(let index):

@@ -10,7 +10,7 @@ import SwiftUI
 final class Router: ObservableObject {
     enum Route: Hashable {
         case authLogin
-//        case main
+        case personalTerm
         case createPost
         case postDetail(post: Int)
     }
