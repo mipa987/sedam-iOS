@@ -13,6 +13,7 @@ final class Router: ObservableObject {
         case personalTerm
         case createPost
         case postDetail(post: Int)
+        case myPostList
     }
 
     @Published var path = NavigationPath()
