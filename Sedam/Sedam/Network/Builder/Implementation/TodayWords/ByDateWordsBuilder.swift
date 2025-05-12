@@ -18,4 +18,8 @@ struct ByDateWordsBuilder: BuilderProtocol {
     let deserializer: NetworkDeserializable = JSONNetworkDeserializer(decoder: JSONDecoder())
     
     var useAuthorization: Bool { false }
+    
+    init(date: String) {
+        self.queries = [URLQueryItem(name: "date", value: date)]
+    }
 }
