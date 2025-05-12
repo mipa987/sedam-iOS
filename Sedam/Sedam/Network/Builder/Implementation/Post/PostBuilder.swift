@@ -17,12 +17,13 @@ struct PostBuilder: BuilderProtocol {
     let parameters: [String: Any] = [:]
     let deserializer: NetworkDeserializable = JSONNetworkDeserializer(decoder: JSONDecoder())
     
-    var useAuthorization: Bool { true }
+    var useAuthorization: Bool
     
     init(httpMethod: HTTPMethod, sort: String, order: String, startDate: String?, endDate: String?) {
         method = httpMethod
         
         if httpMethod == .get {
+            useAuthorization = false
             self.queries =
             [
                 URLQueryItem(name: "sort_by", value: sort),
@@ -30,6 +31,8 @@ struct PostBuilder: BuilderProtocol {
                 URLQueryItem(name: "start_date", value: startDate),
                 URLQueryItem(name: "end_date", value: endDate)
             ]
+        } else {
+            useAuthorization = true
         }
     }
 }
