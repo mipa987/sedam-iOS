@@ -55,13 +55,14 @@
 				Models/Post/Post.swift,
 				Models/Post/PostError.swift,
 				Models/User/UserError.swift,
+				Network/Manager/NetworkManager.swift,
+				Network/Manager/SupabaseManager.swift,
 				Network/Services/CommentService.swift,
 				Network/Services/LikeService.swift,
 				Network/Services/PostService.swift,
 				Network/Services/TermsService.swift,
 				Network/Services/TodayWordService.swift,
 				Network/Services/UserService.swift,
-				Network/Supabase/SupabaseManager.swift,
 			);
 			target = 9279018D2DBBB63600C0FD0A /* SedamTests */;
 		};
