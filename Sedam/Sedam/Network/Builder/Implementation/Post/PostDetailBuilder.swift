@@ -11,7 +11,7 @@ struct PostDetailBuilder <T: Decodable>: BuilderProtocol {
     typealias Response = T
     
     var baseURL: BaseURLType { .production }
-    var path: String = "/posts"
+    var path: String = "api/v1/posts"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
     let parameters: [String: Any]
@@ -32,7 +32,7 @@ struct PostDetailBuilder <T: Decodable>: BuilderProtocol {
     }
     
     init(id: String, parameters: [String: Any]) {
-        method = .put
+        method = .patch
         path += "/\(id)"
         useAuthorization = true
         self.parameters = parameters

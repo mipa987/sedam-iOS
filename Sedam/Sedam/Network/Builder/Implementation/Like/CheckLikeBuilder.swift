@@ -8,10 +8,10 @@
 import Foundation
 
 struct CheckLikeBuilder: BuilderProtocol {
-    typealias Response = String
+    typealias Response = LikeCheckDTO
     
     var baseURL: BaseURLType { .production }
-    var path: String = "/likes/check_liked/"
+    var path: String = "api/v1/likes/check_liked/"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]

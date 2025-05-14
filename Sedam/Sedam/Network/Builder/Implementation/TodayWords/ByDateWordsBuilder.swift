@@ -11,7 +11,7 @@ struct ByDateWordsBuilder: BuilderProtocol {
     typealias Response = [String]
     
     var baseURL: BaseURLType { .production }
-    var path: String = "/today-words/by-date"
+    var path: String = "api/v1/today-words/by-date"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]

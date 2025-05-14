@@ -6,5 +6,5 @@
 //
 
 enum BaseURLType: String {
-    case production = "https://sedam.ddns.net"
+    case production = "https://sedam-backend.onrender.com"
 }

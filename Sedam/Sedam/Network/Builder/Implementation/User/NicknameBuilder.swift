@@ -8,18 +8,19 @@
 import Foundation
 
 struct NicknameBuilder: BuilderProtocol {
-    typealias Response = String
+    typealias Response = UserDTO
     
     var baseURL: BaseURLType { .production }
-    var path: String = "/users/nickname"
+    var path: String = "api/v1/users/nickname"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod 
-    let parameters: [String: Any] = [:]
+    let parameters: [String: Any]
     let deserializer: NetworkDeserializable = JSONNetworkDeserializer(decoder: JSONDecoder())
 
     var useAuthorization: Bool { true }
     
-    init(http: HTTPMethod) {
+    init(http: HTTPMethod, parameters: [String: Any] = [:]) {
         method = http
+        self.parameters = parameters
     }
 }

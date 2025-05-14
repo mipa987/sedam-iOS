@@ -8,10 +8,10 @@
 import Foundation
 
 struct AgreeTermsBuilder: BuilderProtocol {
-    typealias Response = String
+    typealias Response = ResponseDTO
     
     var baseURL: BaseURLType { .production }
-    var path: String = "/terms/"
+    var path: String = "/api/v1/terms"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
     let parameters: [String: Any] = [:]
@@ -20,8 +20,7 @@ struct AgreeTermsBuilder: BuilderProtocol {
     var useAuthorization: Bool { true }
     
     init(termTitle: String, httpMethod: HTTPMethod) {
-        path += "\(termTitle)/agree"
+        path += "/\(termTitle)/agree"
         method = httpMethod
     }
 }
-

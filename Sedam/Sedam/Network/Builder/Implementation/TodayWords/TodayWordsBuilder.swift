@@ -11,7 +11,7 @@ struct TodayWordsBuilder: BuilderProtocol {
     typealias Response = [String]
     
     var baseURL: BaseURLType { .production }
-    var path: String = "/today-words/today"
+    var path: String = "api/v1/today-words/today"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]

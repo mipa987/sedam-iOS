@@ -76,9 +76,9 @@ final class PostService {
     }
     
     //post 삭제하기
-    func deleteOnePost(id: String) async throws -> String {
-        let builder = PostDetailBuilder<String>(httpMethod: .delete, id: id)
+    func deleteOnePost(id: String) async throws {
+        let builder = PostDetailBuilder<ResponseDTO>(httpMethod: .delete, id: id)
         
-        return try await networkManager.fetchData(builder)
+        _ = try await networkManager.fetchData(builder)
     }
 }

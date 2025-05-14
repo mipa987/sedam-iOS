@@ -31,6 +31,6 @@ final class LikeService {
     func hasLiked(postId: String) async throws -> Bool {
         let builder = CheckLikeBuilder(postId: postId)
         
-        return try await networkManager.fetchData(builder) == "true"
+        return try await networkManager.fetchData(builder).liked
     }
 }
