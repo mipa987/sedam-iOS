@@ -1,10 +1,10 @@
-////
-////  AppleAuthManager.swift
-////  Sedam
-////
-////  Created by minsong kim on 4/23/25.
-////
 //
+//  AppleAuthManager.swift
+//  Sedam
+//
+//  Created by minsong kim on 4/23/25.
+//
+
 import AuthenticationServices
 import Supabase
 import SwiftUI
@@ -29,25 +29,11 @@ final class AppleAuthManager: NSObject, ASAuthorizationControllerDelegate {
             let idToken = String(data: tokenData, encoding: .utf8)
         else {
             print("❌ Apple ID Token 추출 실패")
-//            onFailure?()
             return
         }
         
         onSuccess?(idToken)
-
-//        Task {
-//            do {
-//                let session = try await SupabaseManager.shared.supabase.auth.signInWithIdToken(
-//                    credentials: .init(provider: .apple, idToken: idToken)
-//                )
-//                DispatchQueue.main.async {
-//
-//                    print("✅ Supabase 로그인 성공: \(session.user.email ?? "Unknown")")
-//                }
-//            } catch {
-//                print("❌ Supabase 로그인 실패:", error)
-//            }
-//        }
+        
     }
 
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

@@ -44,10 +44,10 @@ class NetworkManager {
             request.setValue(value, forHTTPHeaderField: key)
         }
         
-//        if builder.useAuthorization {
-//            let accesstoken = try KeyChainModule.read(key: .accessToken) ?? ""
-//            request.setValue("Bearer \(accesstoken)", forHTTPHeaderField: "Authorization")
-//        }
+        if builder.useAuthorization {
+            let accesstoken = KeyChainModule.read(key: .accessToken) ?? ""
+            request.setValue("Bearer \(accesstoken)", forHTTPHeaderField: "Authorization")
+        }
         
         request.httpMethod = builder.method.typeName
         
