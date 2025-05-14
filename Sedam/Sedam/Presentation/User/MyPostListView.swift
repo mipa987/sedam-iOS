@@ -18,8 +18,7 @@ struct MyPostListView: View {
             ScrollView {
                 ForEach($viewModel.myPostList.indices, id: \.self) { index in
                     MyPostListCellView(
-                        post: $viewModel.myPostList[index],
-                        index: index
+                        post: $viewModel.myPostList[index]
                     )
                 }
                 .padding(.horizontal, 16)

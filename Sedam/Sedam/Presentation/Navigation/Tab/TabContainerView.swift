@@ -23,7 +23,7 @@ struct TabContainerView: View {
                 case .createPost:
                     // + 버튼 누르면 라우터로 push
                     Color.clear
-                        .onAppear {
+                        .task {
                             router.push(.createPost)
                             // + 탭 선택 효과가 남지 않도록 다시 홈으로
                             selectedTab = .home

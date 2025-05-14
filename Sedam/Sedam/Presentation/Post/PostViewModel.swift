@@ -16,11 +16,12 @@ class PostViewModel: ObservableObject {
     private let postService = PostService.shared
     private let likeService = LikeService.shared
     
+    @MainActor
     func fetchPostList(sortBy: SortType, order: OrderType) {
         isLoading = true
         errorMessage = nil
         
-        Task { @MainActor in
+        Task {
             do {
                 let loaded = try await postService.fetchPostList(sortBy: sortBy, order: order)
                 self.postList = loaded
@@ -64,8 +65,6 @@ class PostViewModel: ObservableObject {
         } else {
             try await likeService.like(postId: id)
         }
-        
-        fetchPostList(sortBy: .likes, order: .desc)
     }
     
     func isLiked(id: String) async throws -> Bool {

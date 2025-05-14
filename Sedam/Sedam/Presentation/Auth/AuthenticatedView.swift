@@ -11,6 +11,7 @@ struct AuthenticatedView: View {
     @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
     @StateObject private var postViewModel: PostViewModel = PostViewModel()
     @StateObject private var wordViewModel: WordViewModel = WordViewModel()
+    @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
         VStack {
@@ -33,5 +34,6 @@ struct AuthenticatedView: View {
             }
         }
         .environmentObject(authViewModel)
+        .environmentObject(userViewModel)
     }
 }

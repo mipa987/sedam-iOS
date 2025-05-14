@@ -9,13 +9,14 @@ import SwiftUI
 
 struct UserCardView: View {
     @EnvironmentObject var router: Router
+    @EnvironmentObject var viewModel: UserViewModel
     
     var body: some View {
         VStack {
             Button {
                 //user nickname 변경
             } label: {
-                Text("고양이 MIPA")
+                Text(viewModel.name)
                     .font(.danjoBold24)
                     .foregroundStyle(.white)
             }
@@ -35,5 +36,8 @@ struct UserCardView: View {
                 .fill(.juniperBerries)
         )
         .frame(maxWidth: .infinity)
+        .task {
+            viewModel.fetchUserNickname()
+        }
     }
 }

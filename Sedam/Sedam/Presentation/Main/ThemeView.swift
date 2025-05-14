@@ -18,7 +18,7 @@ struct ThemeView: View {
                 .font(.danjoBold18)
         }
         .foregroundStyle(.black)
-        .onAppear {
+        .task {
             wordViewModel.getTodayWords()
         }
     }

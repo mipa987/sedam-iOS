@@ -65,7 +65,7 @@ struct PostView: View {
                     }
             }
         }
-        .onAppear {
+        .task {
             Task { @MainActor in
                 self.post = try await viewModel.fetchPostDetail(id: postId)
                 self.isLiked = try await viewModel.isLiked(id: postId)

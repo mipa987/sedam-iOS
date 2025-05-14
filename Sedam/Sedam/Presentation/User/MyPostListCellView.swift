@@ -10,8 +10,7 @@ import SwiftUI
 struct MyPostListCellView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var viewModel: PostViewModel
-    @Binding var post: Post
-    var index: Int
+    @Binding var post: PostDTO
     
     var body: some View {
         VStack {
@@ -36,7 +35,7 @@ struct MyPostListCellView: View {
             .padding(.trailing, 16)
         }
         .onTapGesture {
-            router.push(.postDetail(post: index))
+            router.push(.postDetail(postId: post.id))
         }
     }
 }
