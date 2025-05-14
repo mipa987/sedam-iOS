@@ -47,7 +47,7 @@ class PostViewModel: ObservableObject {
     }
     
     func createNewPost(title: String, content: String) async throws {
-        try await postService.createPosts(title: title, content: content)
+        try await postService.createPost(title: title, content: content)
     }
     
     func deletePost(id: String) async throws {
