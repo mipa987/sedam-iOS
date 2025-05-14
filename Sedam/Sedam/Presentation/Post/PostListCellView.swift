@@ -41,7 +41,7 @@ struct PostListCellView: View {
             .padding(.trailing, 16)
         }
         .onTapGesture {
-            router.push(.postDetail(post: index))
+            router.push(.postDetail(postId: post.id))
         }
     }
 }

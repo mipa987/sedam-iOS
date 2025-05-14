@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LikeButton: View {
     @Binding var isTapped: Bool
-    @Binding var count: Int
+    var count: Int
     var action: (() -> Void)?
     var color: Color
     

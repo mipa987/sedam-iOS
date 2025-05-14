@@ -19,7 +19,7 @@ struct CheckLikeBuilder: BuilderProtocol {
 
     var useAuthorization: Bool { true }
     
-    init(postId: UUID) {
-        path += postId.uuidString
+    init(postId: String) {
+        path += postId
     }
 }

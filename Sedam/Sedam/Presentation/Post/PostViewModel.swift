@@ -46,6 +46,10 @@ class PostViewModel: ObservableObject {
         }
     }
     
+    func fetchPostDetail(id: String) async throws -> PostDTO {
+        return try await postService.fetchOnePost(id: id)
+    }
+    
     func createNewPost(title: String, content: String) async throws {
         try await postService.createPost(title: title, content: content)
     }
@@ -60,10 +64,11 @@ class PostViewModel: ObservableObject {
         } else {
             try await likeService.like(postId: id)
         }
+        
+        fetchPostList(sortBy: .likes, order: .desc)
     }
     
     func isLiked(id: String) async throws -> Bool {
-        try await likeService.hasLiked(postId: id)
+        return try await likeService.hasLiked(postId: id)
     }
 }
-

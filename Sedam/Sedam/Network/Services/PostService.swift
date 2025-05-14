@@ -62,8 +62,8 @@ final class PostService {
     }
     
     //단일 post 조회하기
-    func fetchOnePost(id: UUID) async throws -> PostDTO {
-        let builder = PostDetailBuilder<PostDTO>(httpMethod: .get, id: id.uuidString)
+    func fetchOnePost(id: String) async throws -> PostDTO {
+        let builder = PostDetailBuilder<PostDTO>(httpMethod: .get, id: id)
         
         return try await networkManager.fetchData(builder)
     }

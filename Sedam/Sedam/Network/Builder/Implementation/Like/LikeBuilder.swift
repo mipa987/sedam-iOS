@@ -14,12 +14,13 @@ struct LikeBuilder: BuilderProtocol {
     var path: String = "/likes"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
-    let parameters: [String: Any] = [:]
+    let parameters: [String: Any]
     let deserializer: NetworkDeserializable = JSONNetworkDeserializer(decoder: JSONDecoder())
 
     var useAuthorization: Bool { true }
     
-    init(http: HTTPMethod) {
+    init(http: HTTPMethod, postID: String) {
         method = http
+        self.parameters = ["post_id": postID]
     }
 }
