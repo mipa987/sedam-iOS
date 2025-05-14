@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct PostDetailBuilder: BuilderProtocol {
-    typealias Response = [PostDTO]
+struct PostDetailBuilder <T: Decodable>: BuilderProtocol {
+    typealias Response = T
     
     var baseURL: BaseURLType { .production }
     var path: String = "/posts"
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
-    let parameters: [String: Any] = [:]
+    let parameters: [String: Any]
     let deserializer: NetworkDeserializable = JSONNetworkDeserializer(decoder: JSONDecoder())
     
     var useAuthorization: Bool
@@ -22,11 +22,19 @@ struct PostDetailBuilder: BuilderProtocol {
     init(httpMethod: HTTPMethod, id: String) {
         method = httpMethod
         path += "/\(id)"
+        parameters = [:]
         
         if httpMethod == .get {
             useAuthorization = false
         } else {
             useAuthorization = true
         }
+    }
+    
+    init(id: String, parameters: [String: Any]) {
+        method = .put
+        path += "/\(id)"
+        useAuthorization = true
+        self.parameters = parameters
     }
 }
