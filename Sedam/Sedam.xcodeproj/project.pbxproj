@@ -57,7 +57,6 @@
 				Models/User/UserError.swift,
 				Network/Manager/NetworkManager.swift,
 				Network/Manager/SupabaseManager.swift,
-				Network/Services/CommentService.swift,
 				Network/Services/LikeService.swift,
 				Network/Services/PostService.swift,
 				Network/Services/TermsService.swift,
