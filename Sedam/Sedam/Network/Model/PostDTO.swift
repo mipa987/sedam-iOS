@@ -14,7 +14,7 @@ struct PostDTO: Decodable {
     let userID: String
     let createdAt: String
     let updatedAt: String
-    let likes: Int
+    var likes: Int
     let todayWords: [String]
 
     enum CodingKeys: String, CodingKey {

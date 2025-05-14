@@ -11,7 +11,7 @@ struct PostView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     
-    @Binding var post: Post
+    @Binding var post: PostDTO
     @State var isLiked: Bool = false
     
     var body: some View {

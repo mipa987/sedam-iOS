@@ -11,7 +11,7 @@ struct PostMainView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     
-    private var indexedPosts: [(offset: Int, element: Post)] {
+    private var indexedPosts: [(offset: Int, element: PostDTO)] {
         Array(viewModel.postList.enumerated())
     }
     
@@ -50,7 +50,7 @@ struct PostMainView: View {
                 )
                 .padding(.top, proxy.safeAreaInsets.top + 48)
                 .task {
-                    viewModel.fetchPostList()
+                    viewModel.fetchPostList(sortBy: .likes, order: .desc)
                 }
             }
         }

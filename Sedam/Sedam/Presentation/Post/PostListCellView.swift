@@ -11,14 +11,14 @@ struct PostListCellView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var viewModel: PostViewModel
     @State var rank: String
-    @Binding var post: Post
+    @Binding var post: PostDTO
     var index: Int
     
     var body: some View {
         VStack {
             Text(post.title)
                 .font(.danjoBold18)
-            Text(post.userId.uuidString)
+            Text(post.userID)
                 .font(.danjoBold14)
                 .lineLimit(1)
         }

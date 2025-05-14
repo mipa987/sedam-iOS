@@ -14,25 +14,25 @@ final class LikeService {
     private init() {}
 
     // ✅ 좋아요 누르기
-    func like(postId: UUID) async throws {
-        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
-            throw LikeError.notLoggedIn
-        }
-
-        let newLike = NewLike(postId: postId, userId: userId)
-
-        let response = try await client
-            .from("likes")
-            .insert(newLike)
-            .execute()
-
-        guard (200...299).contains(response.status) else {
-            throw LikeError.likeFailed(reason: response.string())
-        }
+    func like(postId: String) async throws {
+//        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
+//            throw LikeError.notLoggedIn
+//        }
+//
+//        let newLike = NewLike(postId: postId, userId: userId)
+//
+//        let response = try await client
+//            .from("likes")
+//            .insert(newLike)
+//            .execute()
+//
+//        guard (200...299).contains(response.status) else {
+//            throw LikeError.likeFailed(reason: response.string())
+//        }
     }
 
     // ✅ 좋아요 취소하기
-    func unlike(postId: UUID) async throws {
+    func unlike(postId: String) async throws {
         guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
             throw LikeError.notLoggedIn
         }
@@ -50,7 +50,7 @@ final class LikeService {
     }
 
     // 현재 유저가 이 포스트에 좋아요 눌렀는지 여부
-    func hasLiked(postId: UUID) async throws -> Bool {
+    func hasLiked(postId: String) async throws -> Bool {
         guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
             throw LikeError.notLoggedIn
         }
