@@ -18,7 +18,7 @@ struct PostListCellView: View {
         VStack {
             Text(post.title)
                 .font(.danjoBold18)
-            Text(post.userID)
+            Text(post.userNickname)
                 .font(.danjoBold14)
                 .lineLimit(1)
         }
