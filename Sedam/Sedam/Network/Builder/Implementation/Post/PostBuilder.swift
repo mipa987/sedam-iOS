@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct PostBuilder: BuilderProtocol {
-    typealias Response = [PostDTO]
+struct PostBuilder <T: Decodable> : BuilderProtocol {
+    typealias Response = T
     
     var baseURL: BaseURLType { .production }
     var path: String = "api/v1/posts"
