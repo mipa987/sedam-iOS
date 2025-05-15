@@ -27,10 +27,22 @@ struct ThemeView: View {
                 .font(.danjoBold18)
             LogoView(size: 20)
             
-            Button {
-                isCalendarPresented.toggle()
-            } label: {
-                Image(systemName: "calendar")
+            HStack {
+                Button {
+                    isCalendarPresented.toggle()
+                } label: {
+                    Image(systemName: "calendar")
+                }
+                
+                Button {
+                    viewModel.togglePostListType()
+                } label : {
+                    if viewModel.postListType.sort == .likes {
+                        Image(systemName: "list.number")
+                    } else {
+                        Image(systemName: "clock")
+                    }
+                }
             }
         }
         .foregroundStyle(.black)

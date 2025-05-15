@@ -17,7 +17,7 @@ struct PostDTO: Decodable {
     let updatedAt: String
     var likes: Int
     let todayWords: [String]
-
+    
     enum CodingKeys: String, CodingKey {
         case id
         case title
@@ -28,5 +28,24 @@ struct PostDTO: Decodable {
         case updatedAt = "updated_at"
         case likes
         case todayWords = "today_words"
+    }
+    
+    private let isoFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        // 1) 고정 포맷 파싱용 POSIX 로케일
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        // 2) 서버 문자열이 UTC 기준이라면 그대로
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
+        
+        return formatter
+    }()
+    
+    var createdAtDate: Date? {
+        return isoFormatter.date(from: createdAt)
+    }
+    
+    var updatedAtDate: Date? {
+        return isoFormatter.date(from: updatedAt)
     }
 }

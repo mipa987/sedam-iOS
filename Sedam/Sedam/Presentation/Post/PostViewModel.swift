@@ -14,6 +14,7 @@ class PostViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var todayWords: [String] = []
+    @Published var postListType = PostListType()
     
     private let postService = PostService.shared
     private let likeService = LikeService.shared
@@ -21,12 +22,29 @@ class PostViewModel: ObservableObject {
     
     init() {
         getTodayWords(by: .now)
-        fetchPostList(sortBy: .likes, order: .desc)
+        fetchPostList(sortBy: postListType.sort, order: postListType.order)
+    }
+    
+    func togglePostListType() {
+        if postListType.sort == .createdAt {
+            postListType.sort = .likes
+        } else {
+            postListType.sort = .createdAt
+        }
+        
+        fetchPostList(sortBy: postListType.sort, order: postListType.order, date: postListType.startDate)
+    }
+    
+    private func changePostListType(sortBy: SortType, order: OrderType, date: Date) {
+        postListType = PostListType(sort: sortBy, order: order, startDate: date, enddate: date)
+        
+        fetchPostList(sortBy: sortBy, order: order, date: date)
     }
     
     func fetchPostList(sortBy: SortType, order: OrderType, date: Date = .now) {
         isLoading = true
         errorMessage = nil
+        postListType = PostListType(sort: sortBy, order: order, startDate: date, enddate: date)
         
         Task {
             do {
@@ -86,4 +104,11 @@ class PostViewModel: ObservableObject {
             }
         }
     }
+}
+
+struct PostListType {
+    var sort: SortType = .likes
+    var order: OrderType = .desc
+    var startDate: Date = .now
+    var enddate: Date = .now
 }

@@ -11,12 +11,17 @@ struct MyPostListCellView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject private var viewModel: PostViewModel
     @Binding var post: PostDTO
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter
+    }()
     
     var body: some View {
         VStack {
             Text(post.title)
                 .font(.danjoBold18)
-            Text(post.createdAt)
+            Text(dateFormatter.string(from: post.createdAtDate ?? .now))
                 .font(.danjoBold14)
                 .lineLimit(1)
         }
