@@ -10,7 +10,6 @@ import SwiftUI
 struct AuthenticatedView: View {
     @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
     @StateObject private var postViewModel: PostViewModel = PostViewModel()
-    @StateObject private var wordViewModel: WordViewModel = WordViewModel()
     @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
@@ -23,7 +22,6 @@ struct AuthenticatedView: View {
                     TabContainerView()
                 }
                 .environmentObject(postViewModel)
-                .environmentObject(wordViewModel)
             case .term:
                 TermView(isButtonEnabled: true)
             case .guest:

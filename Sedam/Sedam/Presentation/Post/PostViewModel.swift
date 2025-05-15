@@ -7,23 +7,30 @@
 
 import SwiftUI
 
+@MainActor
 class PostViewModel: ObservableObject {
     @Published var postList: [PostDTO] = []
     @Published var myPostList: [PostDTO] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
+    @Published var todayWords: [String] = []
     
     private let postService = PostService.shared
     private let likeService = LikeService.shared
+    private let wordService = TodayWordService.shared
     
-    @MainActor
-    func fetchPostList(sortBy: SortType, order: OrderType) {
+    init() {
+        getTodayWords(by: .now)
+        fetchPostList(sortBy: .likes, order: .desc)
+    }
+    
+    func fetchPostList(sortBy: SortType, order: OrderType, date: Date = .now) {
         isLoading = true
         errorMessage = nil
         
         Task {
             do {
-                let loaded = try await postService.fetchPostList(sortBy: sortBy, order: order)
+                let loaded = try await postService.fetchPostList(sortBy: sortBy, order: order, startDate: date, endDate: date)
                 self.postList = loaded
             } catch {
                 self.errorMessage = error.localizedDescription
@@ -32,7 +39,6 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    @MainActor
     func fetchMyPostList() {
         isLoading = true
         errorMessage = nil
@@ -69,5 +75,15 @@ class PostViewModel: ObservableObject {
     
     func isLiked(id: String) async throws -> Bool {
         return try await likeService.hasLiked(postId: id)
+    }
+    
+    func getTodayWords(by date: Date) {
+        Task {
+            do {
+                todayWords = try await wordService.fetchWords(by: date)
+            } catch {
+                debugPrint("❌word error: \(error.localizedDescription)")
+            }
+        }
     }
 }
