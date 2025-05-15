@@ -38,18 +38,27 @@ enum OrderType {
 
 final class PostService {
     static let shared = PostService()
-    let networkManager = NetworkManager()
+    private let networkManager = NetworkManager()
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        
+        return formatter
+    }()
     
     //정렬 기준에 따라 모든 post 불러오기
-    func fetchPostList(sortBy: SortType, order: OrderType, startDate: String? = nil, endDate: String? = nil) async throws -> [PostDTO] {
-        let builder = PostBuilder(httpMethod: .get, sort: sortBy.name, order: order.name, startDate: startDate, endDate: endDate)
+    func fetchPostList(sortBy: SortType, order: OrderType, startDate: Date = .now, endDate: Date = .now) async throws -> [PostDTO] {
+        let startDateString = dateFormatter.string(from: startDate)
+        let endDateString = dateFormatter.string(from: endDate)
+        
+        let builder = PostBuilder<[PostDTO]>(httpMethod: .get, sort: sortBy.name, order: order.name, startDate: startDateString, endDate: endDateString)
         
         return try await networkManager.fetchData(builder)
     }
     
     //새로운 post 생성하기
     func createPost(title: String, content: String) async throws {
-        let builder = PostBuilder(parameters: ["title": title, "content": content])
+        let builder = PostBuilder<PostDTO>(parameters: ["title": title, "content": content])
         
         _ = try await networkManager.fetchData(builder)
     }

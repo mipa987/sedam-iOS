@@ -13,6 +13,12 @@ struct PostListCellView: View {
     @State var rank: String
     @Binding var post: PostDTO
     var index: Int
+
+    private let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH시\nmm분"
+        return formatter
+    }()
     
     var body: some View {
         VStack {
@@ -27,8 +33,14 @@ struct PostListCellView: View {
         .background(.white)
         .clipShape(RoundedRectangle(cornerRadius: 20))
         .overlay(alignment: .leading) {
-            RankComponent(rank: $rank)
-                .padding(.leading, 16)
+            if viewModel.postListType.sort == .likes {
+                RankComponent(rank: $rank)
+                    .padding(.leading, 16)
+            } else {
+                Text(dateFormatter.string(from: post.updatedAtDate ?? .now))
+                    .font(.danjoBold18)
+                    .padding(.leading, 16)
+            }
         }
         .overlay(alignment: .trailing) {
             VStack {

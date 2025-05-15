@@ -25,9 +25,7 @@ struct PostMainView: View {
                 // 2) 화면 전체 크기를 차지시키되, 내용은 위쪽 정렬
                 VStack(spacing: 16) {
                     // 3) safe area 높이만큼 패딩
-                    LogoView(size: 20)
                     ThemeView()
-                    LogoView(size: 20)
                     
                     // 4) 남은 공간은 스크롤뷰로 채움
                     ScrollView {
