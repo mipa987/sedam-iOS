@@ -8,104 +8,77 @@
 import Foundation
 import Supabase
 
+enum SortType {
+    case createdAt
+    case likes
+    
+    var name: String {
+        switch self {
+        case .createdAt:
+            "created_at"
+        case .likes:
+            "likes"
+        }
+    }
+}
+
+enum OrderType {
+    case asc
+    case desc
+    
+    var name: String {
+        switch self {
+        case .asc:
+            "asc"
+        case .desc:
+            "desc"
+        }
+    }
+}
+
 final class PostService {
     static let shared = PostService()
-
-    private let client = SupabaseManager.shared.supabase
-    // 모든 post 불러오기
-    func fetchAllPosts(orderBy: PostOrder = .latest) async throws -> [Post] {
-        try await client
-            .from("posts")
-            .select()
-            .order(orderBy.rawValue, ascending: false)
-            .execute()
-            .value
+    let networkManager = NetworkManager()
+    
+    //정렬 기준에 따라 모든 post 불러오기
+    func fetchPostList(sortBy: SortType, order: OrderType, startDate: String? = nil, endDate: String? = nil) async throws -> [PostDTO] {
+        let builder = PostBuilder(httpMethod: .get, sort: sortBy.name, order: order.name, startDate: startDate, endDate: endDate)
+        
+        return try await networkManager.fetchData(builder)
     }
-
-    // 단일 post 조회
-    func fetchPost(by id: UUID) async throws -> Post {
-        try await client
-            .from("posts")
-            .select()
-            .eq("id", value: id.uuidString)
-            .single()
-            .execute()
-            .value
-    }
-
-    func fetchMyPosts(orderBy: PostOrder = .latest) async throws -> [Post] {
-        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
-            throw PostError.notLoggedIn
-        }
-
-        return try await client
-            .from("posts")
-            .select()
-            .eq("user_id", value: userId)
-            .order(orderBy.rawValue, ascending: false)
-            .execute()
-            .value
-    }
-
-    // post 생성
+    
+    //새로운 post 생성하기
     func createPost(title: String, content: String) async throws {
-        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
-            throw PostError.notLoggedIn
-        }
-
-        let newPost = NewPost(userId: userId, title: title, content: content)
-
-        let response = try await client
-            .from("posts")
-            .insert(newPost)
-            .execute()
-
-        guard (200 ... 299).contains(response.status) else {
-            throw PostError.creationFailed(reason: response.string())
-        }
+        let builder = PostBuilder(parameters: ["title": title, "content": content])
+        
+        _ = try await networkManager.fetchData(builder)
     }
-
-    // post 삭제
-    func deletePost(id: UUID) async throws {
-        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
-            throw PostError.notLoggedIn
-        }
-        let response = try await client
-            .from("posts")
-            .delete()
-            .eq("id", value: id.uuidString)
-            .eq("user_id", value: userId)
-            .execute()
-
-        guard (200 ... 299).contains(response.status) else {
-            throw PostError.deletionFailed(reason: response.string())
-        }
+    
+    //정렬 기준에 따라 내 post 불러오기
+    func fetchMyPostList(sortBy: SortType, order: OrderType, startDate: String? = nil, endDate: String? = nil) async throws -> [PostDTO] {
+        let builder = MyPostBuilder(sort: sortBy.name, order: order.name, startDate: startDate, endDate: endDate)
+        
+        return try await networkManager.fetchData(builder)
     }
-
-    func updatePost(id: UUID, title: String, content: String) async throws {
-        guard let userId = SupabaseManager.shared.supabase.auth.currentUser?.id else {
-            throw PostError.notLoggedIn
-        }
-
-        let updatePayload = UpdatePostPayload(
-            title: title,
-            content: content,
-            updated_at: ISO8601DateFormatter().string(from: Date())
-        )
-
-        let response = try await client
-            .from("posts")
-            .update(updatePayload)
-            .eq("id", value: id.uuidString)
-            .eq("user_id", value: userId) // 🔒 작성자 본인만 수정 가능
-            .execute()
-
-        guard (200 ... 299).contains(response.status) else {
-            throw PostError.updateFailed(reason: response.string())
-        }
+    
+    //단일 post 조회하기
+    func fetchOnePost(id: String) async throws -> PostDTO {
+        let builder = PostDetailBuilder<PostDTO>(httpMethod: .get, id: id)
+        
+        return try await networkManager.fetchData(builder)
     }
-
-    // TODO: 좋아요 수 변경
-    // TODO: Post 삭제하면 댓글 삭제
-    // TODO: 중복 좋아요 수 처리
+    
+    //post 내용 업데이트 하기
+    func updateOnePost(id: String, title: String, content: String) async throws -> PostDTO {
+        let builder = PostDetailBuilder<PostDTO>(id: id, parameters: ["title": title, "content": content])
+        
+        return try await networkManager.fetchData(builder)
+    }
+    
+    //post 삭제하기
+    func deleteOnePost(id: String) async throws {
+        let builder = PostDetailBuilder<ResponseDTO>(httpMethod: .delete, id: id)
+        
+        _ = try await networkManager.fetchData(builder)
+    }
 }

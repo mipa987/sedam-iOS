@@ -12,7 +12,7 @@ final class Router: ObservableObject {
         case authLogin
         case personalTerm
         case createPost
-        case postDetail(post: Int)
+        case postDetail(postId: String)
         case myPostList
     }
 

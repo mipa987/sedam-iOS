@@ -30,8 +30,8 @@ struct RouterView<Content: View>: View {
                         TermView()
                     case .createPost:
                         PostCreateView()
-                    case .postDetail(let index):
-                        PostView(post: $postViewModel.postList[index])
+                    case .postDetail(let id):
+                        PostView(postId: id)
                     case .myPostList:
                         MyPostListView()
                     }

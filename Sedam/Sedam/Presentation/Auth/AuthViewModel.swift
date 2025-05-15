@@ -34,6 +34,9 @@ class AuthViewModel: ObservableObject {
                         )
                     self.istermsAgree = try await TermsService.shared.hasAgreed(to: .privacyPolicy)
                     
+                    KeyChainModule.create(key: .accessToken, data: session.accessToken)
+                    KeyChainModule.create(key: .refreshToken, data: session.refreshToken)
+                    
                     if self.istermsAgree {
                         self.authenticationState = .signIn
                     } else {

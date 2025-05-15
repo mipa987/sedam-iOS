@@ -16,7 +16,7 @@ public class KakaoAuthManager {
     @MainActor
     func trySignInWithKakoa() async {
         do {
-            try await SupabaseManager.shared.supabase.auth.signInWithOAuth(
+            let session = try await SupabaseManager.shared.supabase.auth.signInWithOAuth(
                 provider: .kakao,
                 redirectTo: URL(string: "sedam://auth/callback")
             ) { url in
@@ -24,6 +24,8 @@ public class KakaoAuthManager {
             }
             
             debugPrint("✅ Kakao 로그인 성공")
+            KeyChainModule.create(key: .accessToken, data: session.accessToken)
+            KeyChainModule.create(key: .refreshToken, data: session.refreshToken)
         } catch {
             debugPrint("❌ Kakao 로그인 실패: (error: \(error.localizedDescription)")
         }

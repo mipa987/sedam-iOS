@@ -11,8 +11,9 @@ struct PostView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     
-    @Binding var post: Post
+    @State var post: PostDTO?
     @State var isLiked: Bool = false
+    var postId: String
     
     var body: some View {
         ZStack {
@@ -22,15 +23,15 @@ struct PostView: View {
             VStack(alignment: .center) {
                 Spacer()
                 LogoView(size: 10)
-                Text("주제 3가지")
+                Text(post?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
-                Text(post.title)
+                Text(post?.title ?? "")
                     .font(.danjoBold24)
                 LogoView(size: 10)
                 Button {
                     Task { @MainActor in
                         do {
-                            try await viewModel.deletePost(id: post.id)
+                            try await viewModel.deletePost(id: postId)
                             router.pop()
                         } catch {
                             print("❌ error: \(error.localizedDescription)")
@@ -46,28 +47,28 @@ struct PostView: View {
                 Spacer()
                     .frame(height: 20)
                 ScrollView {
-                    Text(post.content)
+                    Text(post?.content ?? "")
                         .font(.danjoBold14)
                         .padding(.horizontal, 20)
                 }
-                LikeButton(isTapped: $isLiked, count: $post.likes, color: .tranquility)
+                LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
                     .tap {
                         Task {
-                            try await viewModel.tapLike(id: post.id, isLiked: isLiked)
+                            try await viewModel.tapLike(id: postId, isLiked: isLiked)
                             if isLiked {
                                 self.isLiked = false
-                                post.likes -= 1
                             } else {
                                 self.isLiked = true
-                                post.likes += 1
                             }
+                            self.post = try await viewModel.fetchPostDetail(id: postId)
                         }
                     }
             }
         }
-        .onAppear {
+        .task {
             Task { @MainActor in
-                self.isLiked = try await viewModel.isLiked(id: post.id)
+                self.post = try await viewModel.fetchPostDetail(id: postId)
+                self.isLiked = try await viewModel.isLiked(id: postId)
             }
         }
     }
