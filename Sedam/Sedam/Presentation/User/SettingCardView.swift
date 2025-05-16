@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingCardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var router: Router
+    @Binding var showSignOutPopUp: Bool
+    @Binding var showLogOutPopUp: Bool
     
     var body: some View {
         VStack {
@@ -22,7 +24,9 @@ struct SettingCardView: View {
             Divider()
                 .padding(8)
             Button {
-                authViewModel.logOut()
+                withAnimation {
+                    showLogOutPopUp = true
+                }
             } label: {
                 Text("로그아웃")
                     .font(.pretendardSemiBold14)
@@ -31,7 +35,9 @@ struct SettingCardView: View {
             Divider()
                 .padding(8)
             Button {
-                authViewModel.signOut()
+                withAnimation {
+                    showSignOutPopUp = true
+                }
             } label: {
                 Text("탈퇴하기")
                     .font(.pretendardSemiBold14)
@@ -47,8 +53,8 @@ struct SettingCardView: View {
     }
 }
 
-struct SettingCardView_Previews: PreviewProvider {
-  static var previews: some View {
-      SettingCardView()
-  }
-}
+//struct SettingCardView_Previews: PreviewProvider {
+//  static var previews: some View {
+//      SettingCardView(showPopUp: .constant(false))
+//  }
+//}

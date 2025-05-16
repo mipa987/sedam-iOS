@@ -8,7 +8,7 @@
 import SwiftUI
 
 class UserViewModel: ObservableObject {
-    @Published var name: String = ""
+    @Published var name: String = "손님"
     
     @MainActor
     func fetchUserNickname() {
@@ -16,6 +16,7 @@ class UserViewModel: ObservableObject {
             do {
                 name = try await UserService.shared.fetchNickname()
             } catch {
+                name = "손님"
                 print("❌ error: \(error.localizedDescription)")
             }
         }
