@@ -12,6 +12,7 @@ final class Router: ObservableObject {
         case authLogin
         case personalTerm
         case createPost
+        case updatePost(id: String, title: String, content: String)
         case postDetail(postId: String)
         case myPostList
     }

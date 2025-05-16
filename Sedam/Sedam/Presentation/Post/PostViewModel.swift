@@ -75,6 +75,10 @@ class PostViewModel: ObservableObject {
         return try await postService.fetchOnePost(id: id)
     }
     
+    func updatePost(title: String, content: String, id: String) async throws {
+        _ = try await postService.updateOnePost(id: id, title: title, content: content)
+    }
+    
     func createNewPost(title: String, content: String) async throws {
         try await postService.createPost(title: title, content: content)
     }
