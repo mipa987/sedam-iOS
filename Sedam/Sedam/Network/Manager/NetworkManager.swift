@@ -15,14 +15,13 @@ class NetworkManager {
         if let string = String(data: data, encoding: .utf8) {
             print("Response Body:", string)
         }
-        //Error
-        let decodedData: Builder.Response = try await builder.deserializer.deserialize(data)
         
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.responseNotFound
         }
         
         if (200...299).contains(httpResponse.statusCode) {
+            let decodedData: Builder.Response = try await builder.deserializer.deserialize(data)
             return decodedData
         } else if httpResponse.statusCode == 401 {
             throw NetworkError.accessDenied
