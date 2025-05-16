@@ -63,6 +63,9 @@ struct ThemeView: View {
                 .padding(.top, 16)
             }
         }
+        .task {
+            self.date = viewModel.postListType.startDate
+        }
     }
 }
 
