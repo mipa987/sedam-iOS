@@ -73,6 +73,8 @@ class AuthViewModel: ObservableObject {
         Task {
             do {
                 try await UserService().deleteUser()
+                KeyChainModule.delete(key: .accessToken)
+                KeyChainModule.delete(key: .refreshToken)
                 authenticationState = .splash
             } catch {
                 print("❌ error: \(error.localizedDescription)")
@@ -84,6 +86,8 @@ class AuthViewModel: ObservableObject {
         Task {
             do {
                 try await SupabaseManager.shared.supabase.auth.signOut()
+                KeyChainModule.delete(key: .accessToken)
+                KeyChainModule.delete(key: .refreshToken)
                 authenticationState = .splash
             } catch {
                 print("❌ error: \(error.localizedDescription)")

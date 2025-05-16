@@ -12,4 +12,5 @@ enum NetworkError: Error {
     case responseNotFound
     case invalidStatus(Int)
     case bindingFailure
+    case accessDenied
 }

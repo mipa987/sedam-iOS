@@ -41,6 +41,17 @@ struct LoginView: View {
                                 }
                             }
                     }
+                    
+                    HStack {
+                        Text("손님으로 볼게요")
+                            .font(.danjoBold14)
+                            .foregroundStyle(.dadsCoupe)
+                    }
+                    .padding(.vertical, 24)
+                    .onTapGesture {
+                        viewModel.authenticationState = .guest
+                        KeyChainModule.create(key: .guestMode, data: "true")
+                    }
                 }
                 .padding(EdgeInsets(top: 0, leading: 24, bottom: 20, trailing: 24))
             }

@@ -24,6 +24,8 @@ class NetworkManager {
         
         if (200...299).contains(httpResponse.statusCode) {
             return decodedData
+        } else if httpResponse.statusCode == 401 {
+            throw NetworkError.accessDenied
         } else {
             print(httpResponse.statusCode)
             throw NetworkError.invalidStatus(httpResponse.statusCode)
