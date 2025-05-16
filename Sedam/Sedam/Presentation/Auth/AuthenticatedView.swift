@@ -13,24 +13,22 @@ struct AuthenticatedView: View {
     @StateObject private var userViewModel: UserViewModel = UserViewModel()
     
     var body: some View {
-        VStack {
-            switch authViewModel.authenticationState {
-            case .splash:
-                LoginView()
-            case .signIn:
-                RouterView {
-                    TabContainerView()
+        RouterView {
+            TabContainerView()
+                .fullScreenCover(
+                    isPresented: $authViewModel.isLogInPresented,
+                    onDismiss: {}
+                ) {
+                    LoginView()
                 }
-                .environmentObject(postViewModel)
-            case .term:
-                TermView(isButtonEnabled: true)
-            case .guest:
-                RouterView {
-                    TabContainerView()
+                .fullScreenCover(
+                    isPresented: $authViewModel.isTermPresented,
+                    onDismiss: {}
+                ) {
+                    TermView(isButtonEnabled: true)
                 }
-                .environmentObject(postViewModel)
-            }
         }
+        .environmentObject(postViewModel)
         .environmentObject(authViewModel)
         .environmentObject(userViewModel)
     }

@@ -48,7 +48,7 @@ struct PostMainView: View {
                 )
                 .padding(.top, proxy.safeAreaInsets.top + 48)
                 .task {
-                    viewModel.fetchPostList(sortBy: .likes, order: .desc)
+                    viewModel.fetchPostList(sortBy: viewModel.postListType.sort, order: viewModel.postListType.order, date: viewModel.postListType.startDate)
                 }
             }
         }

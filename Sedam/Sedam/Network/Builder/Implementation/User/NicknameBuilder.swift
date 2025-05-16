@@ -10,8 +10,8 @@ import Foundation
 struct NicknameBuilder: BuilderProtocol {
     typealias Response = UserDTO
     
-    var baseURL: BaseURLType { .production }
-    var path: String = "api/v1/users/nickname"
+    var baseURL: BaseURLType { .qa }
+    var path: String = PathURLType.userNickname.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod 
     let parameters: [String: Any]

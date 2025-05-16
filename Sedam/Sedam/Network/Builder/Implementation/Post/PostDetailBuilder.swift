@@ -10,8 +10,8 @@ import Foundation
 struct PostDetailBuilder <T: Decodable>: BuilderProtocol {
     typealias Response = T
     
-    var baseURL: BaseURLType { .production }
-    var path: String = "api/v1/posts"
+    var baseURL: BaseURLType { .qa }
+    var path: String = PathURLType.onePost.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
     let parameters: [String: Any]

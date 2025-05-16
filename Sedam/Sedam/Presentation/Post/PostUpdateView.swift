@@ -1,21 +1,23 @@
 //
-//  PostCreateView.swift
+//  PostUpdateView.swift
 //  Sedam
 //
-//  Created by minsong kim on 4/28/25.
+//  Created by minsong kim on 5/16/25.
 //
 
 import SwiftUI
 
-struct PostCreateView: View {
+struct PostUpdateView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     @EnvironmentObject var authViewModel: AuthViewModel
     
-    @State var title: String = ""
-    @State var content: String = ""
-    @FocusState private var isTextEditorFocused: Bool
+    @State var post: PostDTO?
+    @State var title: String
+    @State var content: String
     @State var showLogInPopUp: Bool = false
+    @FocusState private var isTextEditorFocused: Bool
+    var postId: String
     
     var body: some View {
         ZStack {
@@ -28,21 +30,14 @@ struct PostCreateView: View {
             
             VStack(alignment: .center) {
                 LogoView(size: 10)
-                Text(viewModel.todayWords.joined(separator: ", "))
+                Text(post?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
-                TextField("제목을 입력하세요.", text: $title)
+                TextField(title, text: $title)
                     .font(.danjoBold24)
                     .multilineTextAlignment(.center)
                 LogoView(size: 10)
                 VStack {
                     ZStack(alignment: .topLeading) {
-                        if content.isEmpty {
-                            Text("3가지 단어가 모두 들어간 글을 작성해주세요.")
-                                .foregroundStyle(.gray)
-                                .font(.danjoBold14)
-                                .padding(.vertical, 12)
-                                .padding(.horizontal, 28)
-                        }
                         TextEditor(text: $content)
                             .focused($isTextEditorFocused)
                             .frame(maxWidth: .infinity)
@@ -62,7 +57,7 @@ struct PostCreateView: View {
                     .tap() {
                         Task { @MainActor in
                             do {
-                                try await viewModel.createNewPost(title: title, content: content)
+                                try await viewModel.updatePost(title: title, content: content, id: postId)
                                 router.pop()
                             } catch NetworkError.accessDenied {
                                 withAnimation {
@@ -76,6 +71,11 @@ struct PostCreateView: View {
                     .padding(.horizontal, 24)
             }
             Spacer()
+        }
+        .task {
+            Task { @MainActor in
+                self.post = try await viewModel.fetchPostDetail(id: postId)
+            }
         }
         .overlay {
             if showLogInPopUp {
@@ -94,9 +94,4 @@ struct PostCreateView: View {
             }
         }
     }
-}
-
-#Preview {
-    PostCreateView(title: "",content: "")
-        .environmentObject(PostViewModel())
 }

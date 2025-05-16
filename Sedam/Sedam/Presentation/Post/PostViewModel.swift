@@ -57,22 +57,20 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func fetchMyPostList() {
+    func fetchMyPostList() async throws {
         isLoading = true
         errorMessage = nil
         
-        Task { 
-            do {
-                let loaded = try await postService.fetchMyPostList(sortBy: .createdAt, order: .desc)
-                self.myPostList = loaded
-            } catch {
-                self.errorMessage = error.localizedDescription
-            }
-        }
+        let loaded = try await postService.fetchMyPostList(sortBy: .createdAt, order: .desc)
+        self.myPostList = loaded
     }
     
     func fetchPostDetail(id: String) async throws -> PostDTO {
         return try await postService.fetchOnePost(id: id)
+    }
+    
+    func updatePost(title: String, content: String, id: String) async throws {
+        _ = try await postService.updateOnePost(id: id, title: title, content: content)
     }
     
     func createNewPost(title: String, content: String) async throws {

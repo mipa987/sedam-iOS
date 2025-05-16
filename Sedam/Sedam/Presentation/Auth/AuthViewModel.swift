@@ -13,9 +13,21 @@ class AuthViewModel: ObservableObject {
     private let kakao = KakaoAuthManager()
     private let term = TermsService.shared
     
-    @Published var authenticationState: AuthenticationState = .splash
+    @Published var authenticationState: AuthenticationState = .splash {
+        didSet {
+            if authenticationState == .splash {
+                isLogInPresented = true
+            } else if authenticationState == .term {
+                isTermPresented = true
+            } else {
+                isLogInPresented = false
+            }
+        }
+    }
     @Published var loginType: LogIn?
     @Published var istermsAgree = false
+    @Published var isLogInPresented: Bool = true
+    @Published var isTermPresented: Bool = false
     
     init() {
         apple.onSuccess = { [weak self] idToken in
@@ -73,6 +85,8 @@ class AuthViewModel: ObservableObject {
         Task {
             do {
                 try await UserService().deleteUser()
+                KeyChainModule.delete(key: .accessToken)
+                KeyChainModule.delete(key: .refreshToken)
                 authenticationState = .splash
             } catch {
                 print("❌ error: \(error.localizedDescription)")
@@ -84,6 +98,8 @@ class AuthViewModel: ObservableObject {
         Task {
             do {
                 try await SupabaseManager.shared.supabase.auth.signOut()
+                KeyChainModule.delete(key: .accessToken)
+                KeyChainModule.delete(key: .refreshToken)
                 authenticationState = .splash
             } catch {
                 print("❌ error: \(error.localizedDescription)")

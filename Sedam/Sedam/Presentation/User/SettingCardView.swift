@@ -10,6 +10,8 @@ import SwiftUI
 struct SettingCardView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @EnvironmentObject var router: Router
+    @Binding var showSignOutPopUp: Bool
+    @Binding var showLogOutPopUp: Bool
     
     var body: some View {
         VStack {
@@ -21,21 +23,35 @@ struct SettingCardView: View {
                 }
             Divider()
                 .padding(8)
-            Button {
-                authViewModel.logOut()
-            } label: {
-                Text("로그아웃")
-                    .font(.pretendardSemiBold14)
-                    .foregroundStyle(.white)
-            }
-            Divider()
-                .padding(8)
-            Button {
-                authViewModel.signOut()
-            } label: {
-                Text("탈퇴하기")
-                    .font(.pretendardSemiBold14)
-                    .foregroundStyle(.white)
+            if authViewModel.authenticationState == .guest {
+                Button {
+                    authViewModel.authenticationState = .splash
+                } label: {
+                    Text("로그인")
+                        .font(.pretendardSemiBold14)
+                        .foregroundStyle(.white)
+                }
+            } else {
+                Button {
+                    withAnimation {
+                        showLogOutPopUp = true
+                    }
+                } label: {
+                    Text("로그아웃")
+                        .font(.pretendardSemiBold14)
+                        .foregroundStyle(.white)
+                }
+                Divider()
+                    .padding(8)
+                Button {
+                    withAnimation {
+                        showSignOutPopUp = true
+                    }
+                } label: {
+                    Text("탈퇴하기")
+                        .font(.pretendardSemiBold14)
+                        .foregroundStyle(.white)
+                }
             }
         }
         .padding(.vertical, 16)
@@ -47,8 +63,8 @@ struct SettingCardView: View {
     }
 }
 
-struct SettingCardView_Previews: PreviewProvider {
-  static var previews: some View {
-      SettingCardView()
-  }
-}
+//struct SettingCardView_Previews: PreviewProvider {
+//  static var previews: some View {
+//      SettingCardView(showPopUp: .constant(false))
+//  }
+//}

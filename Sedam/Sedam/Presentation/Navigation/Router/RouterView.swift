@@ -24,12 +24,12 @@ struct RouterView<Content: View>: View {
             content
                 .navigationDestination(for: Router.Route.self) { route in
                     switch route {
-                    case .authLogin:
-                        LoginView()
                     case .personalTerm:
                         TermView()
                     case .createPost:
                         PostCreateView()
+                    case .updatePost(let id, let title, let content):
+                        PostUpdateView(title: title, content: content, postId: id)
                     case .postDetail(let id):
                         PostView(postId: id)
                     case .myPostList:

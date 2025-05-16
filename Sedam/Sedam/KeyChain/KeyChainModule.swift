@@ -12,6 +12,7 @@ final class KeyChainModule {
         case accessToken
         case refreshToken
         case isLogin
+        case guestMode
     }
     
     static func create(key: Key, data: String) {

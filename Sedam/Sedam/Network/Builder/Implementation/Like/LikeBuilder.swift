@@ -10,8 +10,8 @@ import Foundation
 struct LikeBuilder: BuilderProtocol {
     typealias Response = ResponseDTO
     
-    var baseURL: BaseURLType { .production }
-    var path: String = "api/v1/likes"
+    var baseURL: BaseURLType { .qa }
+    var path: String = PathURLType.likes.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
     let parameters: [String: Any] = [:]
