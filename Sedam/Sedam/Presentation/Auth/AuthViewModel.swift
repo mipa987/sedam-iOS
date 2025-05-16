@@ -18,9 +18,11 @@ class AuthViewModel: ObservableObject {
             if authenticationState == .splash {
                 isLogInPresented = true
             } else if authenticationState == .term {
+                isLogInPresented = false
                 isTermPresented = true
             } else {
                 isLogInPresented = false
+                isTermPresented = false
             }
         }
     }
@@ -44,10 +46,12 @@ class AuthViewModel: ObservableObject {
                         .signInWithIdToken(
                             credentials: .init(provider: .apple, idToken: idToken)
                         )
-                    self.istermsAgree = try await TermsService.shared.hasAgreed(to: .privacyPolicy)
+                    print("accessToken: \(session.accessToken)")
                     
                     KeyChainModule.create(key: .accessToken, data: session.accessToken)
                     KeyChainModule.create(key: .refreshToken, data: session.refreshToken)
+                    
+                    self.istermsAgree = try await TermsService.shared.hasAgreed(to: .privacyPolicy)
                     
                     if self.istermsAgree {
                         self.authenticationState = .signIn
@@ -56,7 +60,7 @@ class AuthViewModel: ObservableObject {
                     }
                     print("✅ Supabase 로그인 성공: \(session.user.email ?? "Unknown")")
                 } catch {
-                    print("❌ Supabase 로그인 실패:", error)
+                    print("❌ Supabase 로그인 실패:", error.localizedDescription)
 //                    self?.authenticationState = .failed(error)
                 }
             }

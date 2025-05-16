@@ -22,3 +22,11 @@ class UserViewModel: ObservableObject {
         }
     }
 }
+
+//struct User {
+//    var shared: User = User()
+//    
+//    private init() {}
+//    
+//    var nickname: String = "손님"
+//}

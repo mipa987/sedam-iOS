@@ -14,7 +14,12 @@ class SupabaseManager {
     private init() {}
     
     let supabase: SupabaseClient = SupabaseClient(
-        supabaseURL: URL(string: "https://vjicrnaakktpzutjudae.supabase.co")!,
+        supabaseURL: URL(string: "https://vrmfevcalzhcyuwmyygp.supabase.co")!,
         supabaseKey: Bundle.main.supabaseKey ?? ""
     )
+    
+//    let qaSupabase: SupabaseClient = SupabaseClient(
+//        supabaseURL: URL(string: "https://vjicrnaakktpzutjudae.supabase.co")!,
+//        supabaseKey: Bundle.main.supabaseKey ?? ""
+//    )
 }
