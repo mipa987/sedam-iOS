@@ -24,8 +24,6 @@ struct RouterView<Content: View>: View {
             content
                 .navigationDestination(for: Router.Route.self) { route in
                     switch route {
-                    case .authLogin:
-                        LoginView()
                     case .personalTerm:
                         TermView()
                     case .createPost:

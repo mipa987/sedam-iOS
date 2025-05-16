@@ -25,7 +25,7 @@ struct SettingCardView: View {
                 .padding(8)
             if authViewModel.authenticationState == .guest {
                 Button {
-                    router.push(.authLogin)
+                    authViewModel.authenticationState = .splash
                 } label: {
                     Text("로그인")
                         .font(.pretendardSemiBold14)

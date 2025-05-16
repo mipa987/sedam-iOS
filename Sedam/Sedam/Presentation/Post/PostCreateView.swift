@@ -10,6 +10,8 @@ import SwiftUI
 struct PostCreateView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var title: String = ""
     @State var content: String = ""
     @FocusState private var isTextEditorFocused: Bool
@@ -84,7 +86,10 @@ struct PostCreateView: View {
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: { router.push(.authLogin) }
+                    rightButtonAction: {
+                        authViewModel.authenticationState = .splash
+                        showLogInPopUp = false
+                    }
                 )
             }
         }

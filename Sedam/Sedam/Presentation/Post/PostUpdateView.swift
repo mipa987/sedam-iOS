@@ -10,6 +10,7 @@ import SwiftUI
 struct PostUpdateView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var post: PostDTO?
     @State var title: String
@@ -85,7 +86,10 @@ struct PostUpdateView: View {
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: { router.push(.authLogin) }
+                    rightButtonAction: {
+                        authViewModel.authenticationState = .splash
+                        showLogInPopUp = false
+                    }
                 )
             }
         }

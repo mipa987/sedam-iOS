@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct MyPostListView: View {
-    @EnvironmentObject var router: Router
+//    @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
     @State var showLogInPopUp: Bool = false
     
     var body: some View {
@@ -28,7 +30,8 @@ struct MyPostListView: View {
             }
             Spacer()
         }
-        .task {
+        .onAppear {
+            showLogInPopUp = false
             Task { @MainActor in
                 do {
                     try await viewModel.fetchMyPostList()
@@ -50,7 +53,10 @@ struct MyPostListView: View {
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: { router.push(.authLogin) }
+                    rightButtonAction: {
+                        authViewModel.authenticationState = .splash
+                        showLogInPopUp = false
+                    }
                 )
             }
         }
