@@ -23,25 +23,35 @@ struct SettingCardView: View {
                 }
             Divider()
                 .padding(8)
-            Button {
-                withAnimation {
-                    showLogOutPopUp = true
+            if authViewModel.authenticationState == .guest {
+                Button {
+                    router.push(.authLogin)
+                } label: {
+                    Text("로그인")
+                        .font(.pretendardSemiBold14)
+                        .foregroundStyle(.white)
                 }
-            } label: {
-                Text("로그아웃")
-                    .font(.pretendardSemiBold14)
-                    .foregroundStyle(.white)
-            }
-            Divider()
-                .padding(8)
-            Button {
-                withAnimation {
-                    showSignOutPopUp = true
+            } else {
+                Button {
+                    withAnimation {
+                        showLogOutPopUp = true
+                    }
+                } label: {
+                    Text("로그아웃")
+                        .font(.pretendardSemiBold14)
+                        .foregroundStyle(.white)
                 }
-            } label: {
-                Text("탈퇴하기")
-                    .font(.pretendardSemiBold14)
-                    .foregroundStyle(.white)
+                Divider()
+                    .padding(8)
+                Button {
+                    withAnimation {
+                        showSignOutPopUp = true
+                    }
+                } label: {
+                    Text("탈퇴하기")
+                        .font(.pretendardSemiBold14)
+                        .foregroundStyle(.white)
+                }
             }
         }
         .padding(.vertical, 16)
