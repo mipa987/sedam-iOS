@@ -14,6 +14,7 @@ struct PostUpdateView: View {
     @State var post: PostDTO?
     @State var title: String
     @State var content: String
+    @State var showLogInPopUp: Bool = false
     @FocusState private var isTextEditorFocused: Bool
     var postId: String
     
@@ -57,6 +58,10 @@ struct PostUpdateView: View {
                             do {
                                 try await viewModel.updatePost(title: title, content: content, id: postId)
                                 router.pop()
+                            } catch NetworkError.accessDenied {
+                                withAnimation {
+                                    showLogInPopUp = true
+                                }
                             } catch {
                                 print("❌ error: \(error.localizedDescription)")
                             }
@@ -69,6 +74,19 @@ struct PostUpdateView: View {
         .task {
             Task { @MainActor in
                 self.post = try await viewModel.fetchPostDetail(id: postId)
+            }
+        }
+        .overlay {
+            if showLogInPopUp {
+                CustomPopUpView(
+                    showPopUp: $showLogInPopUp,
+                    title: "로그인",
+                    message: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+                    leftButtonText: "취소",
+                    rightButtonText: "확인",
+                    leftButtonAction: { withAnimation { showLogInPopUp = false }},
+                    rightButtonAction: { router.push(.authLogin) }
+                )
             }
         }
     }
