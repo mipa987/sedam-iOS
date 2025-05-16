@@ -10,8 +10,8 @@ import Foundation
 struct MyPostBuilder: BuilderProtocol {
     typealias Response = [PostDTO]
     
-    var baseURL: BaseURLType { .production }
-    var path: String = "api/v1/posts/my"
+    var baseURL: BaseURLType { .qa }
+    var path: String = PathURLType.myPost.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]

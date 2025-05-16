@@ -10,8 +10,8 @@ import Foundation
 struct CheckLikeBuilder: BuilderProtocol {
     typealias Response = LikeCheckDTO
     
-    var baseURL: BaseURLType { .production }
-    var path: String = "api/v1/likes/check_liked/"
+    var baseURL: BaseURLType { .qa }
+    var path: String = PathURLType.checkLiked.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]
@@ -20,6 +20,6 @@ struct CheckLikeBuilder: BuilderProtocol {
     var useAuthorization: Bool { true }
     
     init(postId: String) {
-        path += postId
+        path += "/\(postId)"
     }
 }
