@@ -10,7 +10,7 @@ import Foundation
 struct DeleteUserBuilder: BuilderProtocol {
     typealias Response = ResponseDTO
     
-    var baseURL: BaseURLType { .qa }
+    var baseURL: BaseURLType { .production }
     var path: String = PathURLType.userDelete.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .delete }

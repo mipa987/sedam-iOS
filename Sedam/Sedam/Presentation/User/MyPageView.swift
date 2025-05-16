@@ -34,7 +34,10 @@ struct MyPageView: View {
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showSignOutPopUp = false } },
-                    rightButtonAction: { authViewModel.signOut() }
+                    rightButtonAction: {
+                        authViewModel.signOut()
+                        showSignOutPopUp = false
+                    }
                 )
             }
             
@@ -46,7 +49,10 @@ struct MyPageView: View {
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogOutPopUp = false } },
-                    rightButtonAction: { authViewModel.logOut() }
+                    rightButtonAction: {
+                        authViewModel.logOut()
+                        showLogOutPopUp = false
+                    }
                 )
             }
         }

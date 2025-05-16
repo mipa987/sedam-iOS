@@ -10,7 +10,7 @@ import Foundation
 struct NicknameBuilder: BuilderProtocol {
     typealias Response = UserDTO
     
-    var baseURL: BaseURLType { .qa }
+    var baseURL: BaseURLType { .production }
     var path: String = PathURLType.userNickname.path(type: .qa)
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod 
