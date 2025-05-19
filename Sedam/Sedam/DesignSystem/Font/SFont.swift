@@ -65,6 +65,7 @@ extension Font {
     static let maruburiRegular24: Font = .custom(SFont.Name.maruburiRegular.file, size: 24)
     
     static let maruburiSemibold14: Font = .custom(SFont.Name.maruburiSemiBold.file, size: 14)
+    static let maruburiSemibold18: Font = .custom(SFont.Name.maruburiSemiBold.file, size: 18)
     
     static let maruburiBold18: Font = .custom(SFont.Name.maruburiBold.file, size: 18)
     static let maruburiBold24: Font = .custom(SFont.Name.maruburiBold.file, size: 24)

@@ -29,9 +29,9 @@ struct PostCreateView: View {
             VStack(alignment: .center) {
                 LogoView(size: 10)
                 Text(viewModel.todayWords.joined(separator: ", "))
-                    .font(.danjoBold14)
+                    .font(.maruburiSemibold14)
                 TextField("제목을 입력하세요.", text: $title)
-                    .font(.danjoBold24)
+                    .font(.maruburiBold24)
                     .multilineTextAlignment(.center)
                 LogoView(size: 10)
                 VStack {
@@ -39,7 +39,7 @@ struct PostCreateView: View {
                         if content.isEmpty {
                             Text("3가지 단어가 모두 들어간 글을 작성해주세요.")
                                 .foregroundStyle(.gray)
-                                .font(.danjoBold14)
+                                .font(.maruburiRegular14)
                                 .padding(.vertical, 12)
                                 .padding(.horizontal, 28)
                         }
@@ -48,8 +48,8 @@ struct PostCreateView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .multilineTextAlignment(.leading)
-                            .font(.danjoBold14)
-                            .lineSpacing(4)
+                            .font(.maruburiRegular14)
+                            .lineSpacing(12)
                             .scrollContentBackground(.hidden)
                             .background(Color.clear)
                     }

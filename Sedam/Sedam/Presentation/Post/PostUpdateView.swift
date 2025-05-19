@@ -33,7 +33,7 @@ struct PostUpdateView: View {
                 Text(post?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
                 TextField(title, text: $title)
-                    .font(.danjoBold24)
+                    .font(.maruburiRegular24)
                     .multilineTextAlignment(.center)
                 LogoView(size: 10)
                 VStack {
@@ -43,8 +43,8 @@ struct PostUpdateView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .multilineTextAlignment(.leading)
-                            .font(.danjoBold14)
-                            .lineSpacing(4)
+                            .font(.maruburiRegular14)
+                            .lineSpacing(12)
                             .scrollContentBackground(.hidden)
                             .background(Color.clear)
                     }

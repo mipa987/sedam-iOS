@@ -27,7 +27,8 @@ struct PostView: View {
                 Text(post?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
                 Text(post?.title ?? "")
-                    .font(.danjoBold24)
+                    .font(.maruburiRegular24)
+                    .padding(.vertical, 8)
                 LogoView(size: 10)
                 if isMyPost {
                     HStack {
@@ -63,8 +64,8 @@ struct PostView: View {
                     .frame(height: 20)
                 ScrollView {
                     Text(post?.content ?? "")
-                        .font(.danjoBold14)
-                        .padding(.horizontal, 20)
+                        .font(.maruburiRegular14)
+                        .lineSpacing(12)
                 }
                 LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
                     .tap {

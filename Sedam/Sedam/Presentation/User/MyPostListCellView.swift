@@ -20,9 +20,10 @@ struct MyPostListCellView: View {
     var body: some View {
         VStack {
             Text(post.title)
-                .font(.danjoBold18)
+                .font(.maruburiBold18)
+                .padding(.bottom, 8)
             Text(dateFormatter.string(from: post.createdAtDate ?? .now))
-                .font(.danjoBold14)
+                .font(.maruburiRegular14)
                 .lineLimit(1)
         }
         .frame(maxWidth: .infinity)

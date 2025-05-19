@@ -23,6 +23,7 @@ struct ThemeView: View {
             LogoView(size: 20)
             Text("\(dateFormatter.string(from: date))의 3단어")
                 .font(.danjoBold14)
+                .foregroundStyle(.gray)
             Text(viewModel.todayWords.joined(separator: ", "))
                 .font(.danjoBold18)
             LogoView(size: 20)
@@ -61,6 +62,7 @@ struct ThemeView: View {
                     isCalendarPresented = false
                 }
                 .padding(.top, 16)
+                .font(.pretendardSemiBold14)
             }
         }
         .task {
