@@ -36,8 +36,5 @@ struct UserCardView: View {
                 .fill(.juniperBerries)
         )
         .frame(maxWidth: .infinity)
-        .task {
-            viewModel.fetchUserNickname()
-        }
     }
 }

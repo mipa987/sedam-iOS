@@ -35,6 +35,7 @@ struct PostUpdateView: View {
                 TextField(title, text: $title)
                     .font(.maruburiRegular24)
                     .multilineTextAlignment(.center)
+                    .padding(.vertical, 8)
                 LogoView(size: 10)
                 VStack {
                     ZStack(alignment: .topLeading) {
@@ -82,7 +83,7 @@ struct PostUpdateView: View {
                 CustomPopUpView(
                     showPopUp: $showLogInPopUp,
                     title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogInPopUp = false }},

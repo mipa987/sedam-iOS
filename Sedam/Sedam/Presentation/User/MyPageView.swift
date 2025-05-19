@@ -30,7 +30,7 @@ struct MyPageView: View {
                 CustomPopUpView(
                     showPopUp: $showSignOutPopUp,
                     title: "회원 탈퇴",
-                    message: "탈퇴 시 작성하신 모든 글들이 삭제됩니다.\n 정말 탈퇴하시겠습니까?",
+                    message: "탈퇴 시 작성하신 모든 글들이 삭제됩니다.\n\n정말 탈퇴하시겠습니까?",
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showSignOutPopUp = false } },

@@ -16,7 +16,7 @@ class UserViewModel: ObservableObject {
     }
     
     @MainActor
-    func fetchUserNickname() async throws {
+    func fetchUserNickname() {
         Task {
             do {
                 name = try await UserService.shared.fetchNickname()
