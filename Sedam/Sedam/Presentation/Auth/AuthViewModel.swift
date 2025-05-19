@@ -6,13 +6,17 @@
 //
 
 import SwiftUI
+import Supabase
 
 @MainActor
 class AuthViewModel: ObservableObject {
     private let apple = AppleAuthManager()
     private let kakao = KakaoAuthManager()
     private let term = TermsService.shared
+    private let client = SupabaseManager.shared.supabase
+    private var subscription: AuthStateChangeListenerRegistration?
     
+    @Published var session: Session? = nil
     @Published var authenticationState: AuthenticationState = .splash {
         didSet {
             if authenticationState == .splash {
@@ -32,6 +36,32 @@ class AuthViewModel: ObservableObject {
     @Published var isTermPresented: Bool = false
     
     init() {
+        Task {
+            do {
+                let restored = try await client.auth.session
+                await MainActor.run {
+                    self.session = restored
+                    self.updatePresentationFlags()
+                }
+            } catch {
+                await MainActor.run {
+                    self.session = nil
+                    self.updatePresentationFlags()
+                }
+            }
+        }
+        
+        // 2) 세션 변경 구독
+        Task {
+            self.subscription = await client.auth.onAuthStateChange { [weak self] _, newSession in
+                guard let self = self else { return }
+                Task { @MainActor in
+                    self.session = newSession
+                    self.updatePresentationFlags()
+                }
+            }
+        }
+        
         apple.onSuccess = { [weak self] idToken in
             Task {
                 guard let self else {
@@ -61,8 +91,24 @@ class AuthViewModel: ObservableObject {
                     print("✅ Supabase 로그인 성공: \(session.user.email ?? "Unknown")")
                 } catch {
                     print("❌ Supabase 로그인 실패:", error.localizedDescription)
-//                    self?.authenticationState = .failed(error)
+                    //                    self?.authenticationState = .failed(error)
                 }
+            }
+        }
+    }
+    
+    private func updatePresentationFlags() {
+        // 세션이 없으면 로그인 화면 띄우기
+        isLogInPresented = (session == nil)
+        
+        // 세션이 있지만 약관 동의 정보가 없다면 약관 화면 띄우기
+        Task {
+            istermsAgree = try await term.hasAgreed(to: .privacyPolicy)
+            
+            if istermsAgree {
+                authenticationState = .signIn
+            } else {
+                authenticationState = .term
             }
         }
     }
