@@ -67,6 +67,7 @@ struct PostView: View {
                     Text(post?.content ?? "")
                         .font(.maruburiRegular14)
                         .lineSpacing(12)
+                        .padding(.horizontal, 20)
                 }
                 LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
                     .tap {
