@@ -11,6 +11,12 @@ class UserService {
     static let shared = UserService()
     private let networkManager = NetworkManager()
     
+    func createRandomNickname() async throws -> String {
+        let builder = NicknameCreateBuilder()
+        
+        return try await networkManager.fetchData(builder).message
+    }
+    
     func fetchNickname() async throws -> String {
         let builder = NicknameBuilder(http: .get)
         
