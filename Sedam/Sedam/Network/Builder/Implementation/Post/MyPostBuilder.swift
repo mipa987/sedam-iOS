@@ -11,7 +11,7 @@ struct MyPostBuilder: BuilderProtocol {
     typealias Response = [PostDTO]
     
     var baseURL: BaseURLType { .production }
-    var path: String = PathURLType.myPost.path(type: .qa)
+    var path: String = PathURLType.myPost.path()
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]
