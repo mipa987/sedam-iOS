@@ -11,7 +11,7 @@ struct NicknameCreateBuilder: BuilderProtocol {
     typealias Response = ResponseDTO
     
     var baseURL: BaseURLType { .production }
-    var path: String = PathURLType.userNickname.path(type: .qa)
+    var path: String = PathURLType.userNicknameCreate.path()
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod = .post
     let parameters: [String: Any] = [:]

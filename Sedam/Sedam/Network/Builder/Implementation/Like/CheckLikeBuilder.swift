@@ -11,7 +11,7 @@ struct CheckLikeBuilder: BuilderProtocol {
     typealias Response = LikeCheckDTO
     
     var baseURL: BaseURLType { .production }
-    var path: String = PathURLType.checkLiked.path(type: .qa)
+    var path: String = PathURLType.checkLiked.path()
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }
     let parameters: [String: Any] = [:]
