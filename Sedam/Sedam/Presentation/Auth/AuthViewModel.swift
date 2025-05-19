@@ -115,6 +115,7 @@ class AuthViewModel: ObservableObject {
         Task {
             do {
                 try await term.agree(to: termName)
+                _ = try await UserService.shared.createRandomNickname()
                 authenticationState = .signIn
             } catch {
                 print("❌ error: \(error.localizedDescription)")
