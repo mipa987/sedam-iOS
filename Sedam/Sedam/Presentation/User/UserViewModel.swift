@@ -11,7 +11,12 @@ class UserViewModel: ObservableObject {
     @Published var name: String = "손님"
     
     @MainActor
-    func fetchUserNickname() {
+    func setNickname() async throws {
+        name = try await UserService.shared.createRandomNickname()
+    }
+    
+    @MainActor
+    func fetchUserNickname() async throws {
         Task {
             do {
                 name = try await UserService.shared.fetchNickname()
