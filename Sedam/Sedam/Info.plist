@@ -25,20 +25,18 @@
 	<string>$(TEST_PASSWORD)</string>
 	<key>UIAppFonts</key>
 	<array>
+		<string>MaruBuri-Bold.otf</string>
+		<string>MaruBuri-SemiBold.otf</string>
+		<string>MaruBuri-Light.otf</string>
+		<string>MaruBuri-Regular.otf</string>
 		<string>Pretendard-SemiBold.otf</string>
 		<string>Danjo-bold-Regular.otf</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string></string>
-	<key>TEST_PASSWORD</key>
-	<string>$(TEST_PASSWORD)</string>
-	<key>SUPABASE_KEY</key>
-	<string>$(SUPABASE_KEY)</string>
 	<key>LAMBDA_APP_KEY</key>
 	<string>$(LAMBDA_APP_KEY)</string>
 	<key>LAMBDA_URL</key>
 	<string>https://$(LAMBDA_URL)</string>
-	<key>TEST_EMAIL</key>
-	<string>$(TEST_EMAIL)</string>
 </dict>
 </plist>

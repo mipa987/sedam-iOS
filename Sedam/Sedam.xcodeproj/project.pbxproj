@@ -42,6 +42,10 @@
 		E16D5CD52DBBCAAF004F5713 /* Exceptions for "Sedam" folder in "SedamTests" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				"DesignSystem/Font/MaruBuri-Bold.otf",
+				"DesignSystem/Font/MaruBuri-Light.otf",
+				"DesignSystem/Font/MaruBuri-Regular.otf",
+				"DesignSystem/Font/MaruBuri-SemiBold.otf",
 				Enums/PostOrder.swift,
 				Enums/TermName.swift,
 				"Extension/Bundle+.swift",
