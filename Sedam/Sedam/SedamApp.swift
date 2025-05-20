@@ -17,7 +17,7 @@ struct SedamApp: App {
     
     var body: some Scene {
         WindowGroup {
-            AuthenticatedView()
+            ContentView()
         }
     }
 }

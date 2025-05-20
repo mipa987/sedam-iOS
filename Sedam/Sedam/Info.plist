@@ -32,11 +32,12 @@
 		<string>Pretendard-SemiBold.otf</string>
 		<string>Danjo-bold-Regular.otf</string>
 	</array>
-	<key>CFBundleIdentifier</key>
-	<string></string>
-	<key>LAMBDA_APP_KEY</key>
-	<string>$(LAMBDA_APP_KEY)</string>
-	<key>LAMBDA_URL</key>
-	<string>https://$(LAMBDA_URL)</string>
+	<key>UILaunchScreen</key>
+	<dict>
+		<key>UIColorName</key>
+		<string>Modern Ivory</string>
+		<key>UILaunchScreen</key>
+		<dict/>
+	</dict>
 </dict>
 </plist>
