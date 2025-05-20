@@ -11,7 +11,7 @@ struct AgreeTermsBuilder: BuilderProtocol {
     typealias Response = ResponseDTO
     
     var baseURL: BaseURLType { .production }
-    var path: String = PathURLType.terms.path(type: .qa)
+    var path: String = PathURLType.terms.path()
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod
     let parameters: [String: Any] = [:]

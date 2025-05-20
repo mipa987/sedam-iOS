@@ -31,5 +31,11 @@ struct AuthenticatedView: View {
         .environmentObject(postViewModel)
         .environmentObject(authViewModel)
         .environmentObject(userViewModel)
+        .onOpenURL { url in
+            Task {
+                // Apple/Kakao 로그인 콜백을 세션으로 변환
+                try? await SupabaseManager.shared.supabase.auth.session(from: url)
+            }
+        }
     }
 }

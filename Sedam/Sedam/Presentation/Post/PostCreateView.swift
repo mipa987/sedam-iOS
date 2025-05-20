@@ -29,17 +29,18 @@ struct PostCreateView: View {
             VStack(alignment: .center) {
                 LogoView(size: 10)
                 Text(viewModel.todayWords.joined(separator: ", "))
-                    .font(.danjoBold14)
+                    .font(.maruburiSemibold14)
                 TextField("제목을 입력하세요.", text: $title)
-                    .font(.danjoBold24)
+                    .font(.maruburiBold24)
                     .multilineTextAlignment(.center)
+                    .padding(.vertical, 8)
                 LogoView(size: 10)
                 VStack {
                     ZStack(alignment: .topLeading) {
                         if content.isEmpty {
                             Text("3가지 단어가 모두 들어간 글을 작성해주세요.")
                                 .foregroundStyle(.gray)
-                                .font(.danjoBold14)
+                                .font(.maruburiRegular14)
                                 .padding(.vertical, 12)
                                 .padding(.horizontal, 28)
                         }
@@ -48,8 +49,8 @@ struct PostCreateView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .multilineTextAlignment(.leading)
-                            .font(.danjoBold14)
-                            .lineSpacing(4)
+                            .font(.maruburiRegular14)
+                            .lineSpacing(12)
                             .scrollContentBackground(.hidden)
                             .background(Color.clear)
                     }
@@ -82,7 +83,7 @@ struct PostCreateView: View {
                 CustomPopUpView(
                     showPopUp: $showLogInPopUp,
                     title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogInPopUp = false }},

@@ -23,9 +23,10 @@ struct PostListCellView: View {
     var body: some View {
         VStack {
             Text(post.title)
-                .font(.danjoBold18)
+                .font(.maruburiBold18)
+                .padding(.bottom, 8)
             Text(post.userNickname)
-                .font(.danjoBold14)
+                .font(.maruburiRegular14)
                 .lineLimit(1)
         }
         .frame(maxWidth: .infinity)
@@ -38,7 +39,7 @@ struct PostListCellView: View {
                     .padding(.leading, 16)
             } else {
                 Text(dateFormatter.string(from: post.updatedAtDate ?? .now))
-                    .font(.danjoBold18)
+                    .font(.maruburiBold18)
                     .padding(.leading, 16)
             }
         }

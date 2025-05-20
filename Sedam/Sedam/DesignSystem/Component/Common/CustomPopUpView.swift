@@ -26,13 +26,13 @@ struct CustomPopUpView: View {
             VStack(spacing: 12) {
                 Text(title)
                     .frame(height: 30)
-                    .font(.danjoBold18)
+                    .font(.maruburiSemibold14)
                     .padding(.top, 12)
                 
                 Text(message)
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 12)
-                    .font(.danjoBold14)
+                    .font(.maruburiRegular14)
                 
                 HStack {
                     Button {

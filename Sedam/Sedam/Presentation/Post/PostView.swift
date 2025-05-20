@@ -10,10 +10,11 @@ import SwiftUI
 struct PostView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     @State var post: PostDTO?
     @State var isLiked: Bool = false
-    var isMyPost: Bool = true
+    @State var isMyPost: Bool = false
     var postId: String
     
     var body: some View {
@@ -27,7 +28,8 @@ struct PostView: View {
                 Text(post?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
                 Text(post?.title ?? "")
-                    .font(.danjoBold24)
+                    .font(.maruburiRegular24)
+                    .padding(.vertical, 8)
                 LogoView(size: 10)
                 if isMyPost {
                     HStack {
@@ -63,7 +65,8 @@ struct PostView: View {
                     .frame(height: 20)
                 ScrollView {
                     Text(post?.content ?? "")
-                        .font(.danjoBold14)
+                        .font(.maruburiRegular14)
+                        .lineSpacing(12)
                         .padding(.horizontal, 20)
                 }
                 LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
@@ -81,11 +84,12 @@ struct PostView: View {
             }
         }
         .task {
-            // TODO: - 포스트의 유저 id가 내 id와 동일한지 확인
-//            if post?.userID ==
             Task { @MainActor in
                 self.post = try await viewModel.fetchPostDetail(id: postId)
                 self.isLiked = try await viewModel.isLiked(id: postId)
+                if post?.userNickname == userViewModel.name {
+                    isMyPost = true
+                }
             }
         }
     }

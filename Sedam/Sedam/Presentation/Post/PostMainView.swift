@@ -10,6 +10,7 @@ import SwiftUI
 struct PostMainView: View {
     @EnvironmentObject private var router: Router
     @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     private var indexedPosts: [(offset: Int, element: PostDTO)] {
         Array(viewModel.postList.enumerated())
@@ -49,6 +50,7 @@ struct PostMainView: View {
                 .padding(.top, proxy.safeAreaInsets.top + 48)
                 .task {
                     viewModel.fetchPostList(sortBy: viewModel.postListType.sort, order: viewModel.postListType.order, date: viewModel.postListType.startDate)
+                    userViewModel.fetchUserNickname()
                 }
             }
         }

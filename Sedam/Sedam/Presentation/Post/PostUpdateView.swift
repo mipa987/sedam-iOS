@@ -33,8 +33,9 @@ struct PostUpdateView: View {
                 Text(post?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
                 TextField(title, text: $title)
-                    .font(.danjoBold24)
+                    .font(.maruburiRegular24)
                     .multilineTextAlignment(.center)
+                    .padding(.vertical, 8)
                 LogoView(size: 10)
                 VStack {
                     ZStack(alignment: .topLeading) {
@@ -43,8 +44,8 @@ struct PostUpdateView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.horizontal, 24)
                             .multilineTextAlignment(.leading)
-                            .font(.danjoBold14)
-                            .lineSpacing(4)
+                            .font(.maruburiRegular14)
+                            .lineSpacing(12)
                             .scrollContentBackground(.hidden)
                             .background(Color.clear)
                     }
@@ -82,7 +83,7 @@ struct PostUpdateView: View {
                 CustomPopUpView(
                     showPopUp: $showLogInPopUp,
                     title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n로그인 하시겠습니까?",
+                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
                     leftButtonText: "취소",
                     rightButtonText: "확인",
                     leftButtonAction: { withAnimation { showLogInPopUp = false }},
