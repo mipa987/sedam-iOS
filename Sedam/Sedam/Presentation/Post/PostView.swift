@@ -30,7 +30,6 @@ struct PostView: View {
                 Text(post?.title ?? "")
                     .font(.maruburiRegular24)
                     .padding(.vertical, 8)
-                LogoView(size: 10)
                 if isMyPost {
                     HStack {
                         Button {

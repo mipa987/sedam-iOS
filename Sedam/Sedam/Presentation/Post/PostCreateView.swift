@@ -34,7 +34,6 @@ struct PostCreateView: View {
                     .font(.maruburiBold24)
                     .multilineTextAlignment(.center)
                     .padding(.vertical, 8)
-                LogoView(size: 10)
                 VStack {
                     ZStack(alignment: .topLeading) {
                         if content.isEmpty {

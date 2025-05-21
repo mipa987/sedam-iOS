@@ -26,7 +26,6 @@ struct ThemeView: View {
                 .foregroundStyle(.gray)
             Text(viewModel.todayWords.joined(separator: ", "))
                 .font(.danjoBold18)
-            LogoView(size: 20)
             
             HStack {
                 Button {
@@ -69,8 +68,4 @@ struct ThemeView: View {
             self.date = viewModel.postListType.startDate
         }
     }
-}
-
-#Preview {
-    ThemeView()
 }
