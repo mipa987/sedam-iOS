@@ -79,7 +79,13 @@ struct PostMainView: View {
                 }
                 .sheet(isPresented: $isCalendarPresented) {
                     VStack {
-                        DatePicker ( "", selection: $date, in: ...Date(), displayedComponents: .date)
+                        var dateRange: ClosedRange<Date> {
+                            let calendar = Calendar.current
+                            let startComponents = DateComponents(year: 2025, month: 5, day: 20)
+                            
+                            return calendar.date(from: startComponents)!...Date()
+                        }
+                        DatePicker ( "", selection: $date, in: dateRange, displayedComponents: .date)
                             .datePickerStyle(.graphical)
                             .labelsHidden()
                         
