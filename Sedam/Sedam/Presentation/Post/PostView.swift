@@ -11,10 +11,12 @@ struct PostView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var post: PostDTO?
     @State var isLiked: Bool = false
     @State var isMyPost: Bool = false
+    @State var showLogInPopUp: Bool = false
     var postId: String
     
     var body: some View {
@@ -71,13 +73,19 @@ struct PostView: View {
                 LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
                     .tap {
                         Task {
-                            try await viewModel.tapLike(id: postId, isLiked: isLiked)
-                            if isLiked {
-                                self.isLiked = false
-                            } else {
-                                self.isLiked = true
+                            do {
+                                try await viewModel.tapLike(id: postId, isLiked: isLiked)
+                                if isLiked {
+                                    self.isLiked = false
+                                } else {
+                                    self.isLiked = true
+                                }
+                                self.post = try await viewModel.fetchPostDetail(id: postId)
+                            } catch NetworkError.accessDenied {
+                                withAnimation {
+                                    showLogInPopUp = true
+                                }
                             }
-                            self.post = try await viewModel.fetchPostDetail(id: postId)
                         }
                     }
             }
@@ -89,6 +97,22 @@ struct PostView: View {
                 if post?.userNickname == userViewModel.name {
                     isMyPost = true
                 }
+            }
+        }
+        .overlay {
+            if showLogInPopUp {
+                CustomPopUpView(
+                    showPopUp: $showLogInPopUp,
+                    title: "로그인",
+                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
+                    leftButtonText: "취소",
+                    rightButtonText: "확인",
+                    leftButtonAction: { withAnimation { showLogInPopUp = false }},
+                    rightButtonAction: {
+                        authViewModel.authenticationState = .splash
+                        showLogInPopUp = false
+                    }
+                )
             }
         }
     }
