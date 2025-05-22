@@ -14,9 +14,7 @@ class AuthViewModel: ObservableObject {
     private let kakao = KakaoAuthManager()
     private let term = TermsService.shared
     private let client = SupabaseManager.shared.supabase
-    private var subscription: AuthStateChangeListenerRegistration?
     
-    @Published var session: Session? = nil
     @Published var authenticationState: AuthenticationState = .splash {
         didSet {
             if authenticationState == .splash {
@@ -36,31 +34,7 @@ class AuthViewModel: ObservableObject {
     @Published var isTermPresented: Bool = false
     
     init() {
-        Task {
-            do {
-                let restored = try await client.auth.session
-                await MainActor.run {
-                    self.session = restored
-                    self.updatePresentationFlags()
-                }
-            } catch {
-                await MainActor.run {
-                    self.session = nil
-                    self.updatePresentationFlags()
-                }
-            }
-        }
-        
-        // 2) 세션 변경 구독
-        Task {
-            self.subscription = await client.auth.onAuthStateChange { [weak self] _, newSession in
-                guard let self = self else { return }
-                Task { @MainActor in
-                    self.session = newSession
-                    self.updatePresentationFlags()
-                }
-            }
-        }
+        updatePresentationFlags()
         
         apple.onSuccess = { [weak self] idToken in
             Task {
@@ -98,18 +72,23 @@ class AuthViewModel: ObservableObject {
     }
     
     private func updatePresentationFlags() {
-        // 세션이 없으면 로그인 화면 띄우기
-        isLogInPresented = (session == nil)
+        if KeyChainModule.read(key: .accessToken) == nil {
+            authenticationState = .splash
+        }
         
         // 세션이 있지만 약관 동의 정보가 없다면 약관 화면 띄우기
         Task {
-            istermsAgree = try await term.hasAgreed(to: .privacyPolicy)
-            
-            if istermsAgree {
-                authenticationState = .signIn
-            } else {
-                authenticationState = .term
+            do {
+                istermsAgree = try await term.hasAgreed(to: .privacyPolicy)
+                if istermsAgree {
+                    authenticationState = .signIn
+                } else {
+                    authenticationState = .term
+                }
+            } catch NetworkError.accessDenied {
+                authenticationState = .splash
             }
+            
         }
     }
     
