@@ -10,7 +10,6 @@ import SwiftUI
 @MainActor
 class PostViewModel: ObservableObject {
     @Published var postList: [PostDTO] = []
-    @Published var myPostList: [PostDTO] = []
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var todayWords: [String] = []
@@ -55,14 +54,6 @@ class PostViewModel: ObservableObject {
             }
             self.isLoading = false
         }
-    }
-    
-    func fetchMyPostList() async throws {
-        isLoading = true
-        errorMessage = nil
-        
-        let loaded = try await postService.fetchMyPostList(sortBy: .createdAt, order: .desc)
-        self.myPostList = loaded
     }
     
     func fetchPostDetail(id: String) async throws -> PostDTO {

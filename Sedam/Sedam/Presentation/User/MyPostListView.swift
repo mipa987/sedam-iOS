@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct MyPostListView: View {
-//    @EnvironmentObject var router: Router
-    @EnvironmentObject var viewModel: PostViewModel
+    @EnvironmentObject var viewModel: UserViewModel
     @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var showLogInPopUp: Bool = false
