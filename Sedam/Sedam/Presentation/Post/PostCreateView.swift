@@ -45,7 +45,7 @@ struct PostCreateView: View {
                         }
                         TextEditor(text: $content)
                             .focused($isTextEditorFocused)
-                            .frame(maxWidth: .infinity)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
                             .padding(.horizontal, 24)
                             .multilineTextAlignment(.leading)
                             .font(.maruburiRegular14)
@@ -53,7 +53,8 @@ struct PostCreateView: View {
                             .scrollContentBackground(.hidden)
                             .background(Color.clear)
                     }
-                }.overlay(
+                }
+                .background(
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color.dadsCoupe, lineWidth: 2)
                         .padding(.horizontal, 24)

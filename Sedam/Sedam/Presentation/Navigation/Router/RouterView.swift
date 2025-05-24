@@ -43,4 +43,3 @@ struct RouterView<Content: View>: View {
         .environmentObject(router)
     }
 }
-
