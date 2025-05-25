@@ -10,12 +10,10 @@ import SwiftUI
 struct PostCreateView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
-    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var title: String = ""
     @State var content: String = ""
     @FocusState private var isTextEditorFocused: Bool
-    @State var showLogInPopUp: Bool = false
     
     var body: some View {
         ZStack {
@@ -61,43 +59,16 @@ struct PostCreateView: View {
                 )
                 MainButton(title: "등록", font: .pretendardSemiBold18, color: .dadsCoupe)
                     .tap() {
-                        Task { @MainActor in
-                            do {
-                                try await viewModel.createNewPost(title: title, content: content)
-                                router.pop()
-                            } catch NetworkError.accessDenied {
-                                withAnimation {
-                                    showLogInPopUp = true
-                                }
-                            } catch {
-                                print("❌ error: \(error.localizedDescription)")
-                            }
-                        }
+                        viewModel.createNewPost(title: title, content: content)
                     }
                     .padding(.horizontal, 24)
             }
             Spacer()
         }
-        .overlay {
-            if showLogInPopUp {
-                CustomPopUpView(
-                    showPopUp: $showLogInPopUp,
-                    title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
-                    leftButtonText: "취소",
-                    rightButtonText: "확인",
-                    leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: {
-                        authViewModel.authenticationState = .splash
-                        showLogInPopUp = false
-                    }
-                )
-            }
-        }
     }
 }
 
-#Preview {
-    PostCreateView(title: "",content: "")
-        .environmentObject(PostViewModel())
-}
+//#Preview {
+//    PostCreateView(title: "",content: "")
+//        .environmentObject(PostViewModel())
+//}

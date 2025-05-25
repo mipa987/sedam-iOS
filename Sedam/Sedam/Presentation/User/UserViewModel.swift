@@ -37,11 +37,19 @@ class UserViewModel: ObservableObject {
         }
     }
     
-    func fetchMyPostList() async throws {
+    func fetchMyPostList() {
         let dateString: String = "2025-05-20"
         let startDate = dateFormatter.date(from: dateString)!
-        
-        self.myPostList = try await postService.fetchMyPostList(sortBy: .createdAt, order: .desc, startDate: startDate)
+        Task {
+            do {
+                self.myPostList = try await postService.fetchMyPostList(sortBy: .createdAt, order: .desc, startDate: startDate)
+            } catch NetworkError.accessDenied {
+                NotificationCenter.default.post(name: .loginRequired, object: nil)
+            } catch {
+                name = "손님"
+                print("❌ error: \(error.localizedDescription)")
+            }
+        }
     }
 }
 

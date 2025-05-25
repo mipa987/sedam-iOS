@@ -106,7 +106,7 @@ struct PostMainView: View {
     }
 }
 
-#Preview {
-    PostMainView()
-        .environmentObject(PostViewModel())
-}
+//#Preview {
+//    PostMainView()
+//        .environmentObject(PostViewModel())
+//}

@@ -11,12 +11,10 @@ struct PostView: View {
     @EnvironmentObject var router: Router
     @EnvironmentObject var viewModel: PostViewModel
     @EnvironmentObject var userViewModel: UserViewModel
-    @EnvironmentObject var authViewModel: AuthViewModel
     
     @State var post: PostDTO?
     @State var isLiked: Bool = false
     @State var isMyPost: Bool = false
-    @State var showLogInPopUp: Bool = false
     var postId: String
     
     var body: some View {
@@ -35,14 +33,8 @@ struct PostView: View {
                 if isMyPost {
                     HStack {
                         Button {
-                            Task { @MainActor in
-                                do {
-                                    try await viewModel.deletePost(id: postId)
-                                    router.pop()
-                                } catch {
-                                    print("❌ error: \(error.localizedDescription)")
-                                }
-                            }
+                            viewModel.deletePost(id: postId)
+                            router.pop()
                         } label: {
                             Image(systemName: "trash")
                                 .resizable()
@@ -72,21 +64,9 @@ struct PostView: View {
                 }
                 LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
                     .tap {
-                        Task {
-                            do {
-                                try await viewModel.tapLike(id: postId, isLiked: isLiked)
-                                if isLiked {
-                                    self.isLiked = false
-                                } else {
-                                    self.isLiked = true
-                                }
-                                self.post = try await viewModel.fetchPostDetail(id: postId)
-                            } catch NetworkError.accessDenied {
-                                withAnimation {
-                                    showLogInPopUp = true
-                                }
-                            }
-                        }
+                        viewModel.tapLike(id: postId, isLiked: isLiked)
+                        //TODO: - 로직 수정 필요 (성공 시 toggle)
+                        isLiked.toggle()
                     }
             }
         }
@@ -97,22 +77,6 @@ struct PostView: View {
                 if post?.userNickname == userViewModel.name {
                     isMyPost = true
                 }
-            }
-        }
-        .overlay {
-            if showLogInPopUp {
-                CustomPopUpView(
-                    showPopUp: $showLogInPopUp,
-                    title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
-                    leftButtonText: "취소",
-                    rightButtonText: "확인",
-                    leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: {
-                        authViewModel.authenticationState = .splash
-                        showLogInPopUp = false
-                    }
-                )
             }
         }
     }

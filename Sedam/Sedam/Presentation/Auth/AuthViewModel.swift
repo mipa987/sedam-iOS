@@ -5,6 +5,7 @@
 //  Created by minsong kim on 4/23/25.
 //
 
+import Combine
 import SwiftUI
 import Supabase
 
@@ -32,9 +33,20 @@ class AuthViewModel: ObservableObject {
     @Published var istermsAgree = false
     @Published var isLogInPresented: Bool = true
     @Published var isTermPresented: Bool = false
+    @Published var showLogInPopUp: Bool = false
+    
+    private var cancellables = Set<AnyCancellable>()
     
     init() {
         updatePresentationFlags()
+        NotificationCenter.default
+            .publisher(for: .loginRequired)
+            .sink { [weak self] _ in
+                withAnimation {
+                    self?.showLogInPopUp = true
+                }
+            }
+            .store(in: &cancellables)
         
         apple.onSuccess = { [weak self] idToken in
             Task {

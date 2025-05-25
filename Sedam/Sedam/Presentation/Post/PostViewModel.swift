@@ -5,6 +5,7 @@
 //  Created by minsong kim on 4/25/25.
 //
 
+import Combine
 import SwiftUI
 
 @MainActor
@@ -60,23 +61,57 @@ class PostViewModel: ObservableObject {
         return try await postService.fetchOnePost(id: id)
     }
     
-    func updatePost(title: String, content: String, id: String) async throws {
-        _ = try await postService.updateOnePost(id: id, title: title, content: content)
+    func updatePost(title: String, content: String, id: String) {
+        Task {
+            do {
+                _ = try await postService.updateOnePost(id: id, title: title, content: content)
+//                return publisher.map(true)
+                //TODO: 성공시 성공했다고 반환, router.pop() 필요 (진동과 함께)
+            } catch NetworkError.accessDenied {
+                NotificationCenter.default.post(name: .loginRequired, object: nil)
+            } catch {
+                print("❌ error: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func createNewPost(title: String, content: String) async throws {
-        try await postService.createPost(title: title, content: content)
+    func createNewPost(title: String, content: String) {
+        Task {
+            do {
+                try await postService.createPost(title: title, content: content)
+            } catch NetworkError.accessDenied {
+                NotificationCenter.default.post(name: .loginRequired, object: nil)
+            } catch {
+                print("❌ error: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func deletePost(id: String) async throws {
-        _ = try await postService.deleteOnePost(id: id)
+    func deletePost(id: String) {
+        Task {
+            do {
+                _ = try await postService.deleteOnePost(id: id)
+            } catch NetworkError.accessDenied {
+                NotificationCenter.default.post(name: .loginRequired, object: nil)
+            } catch {
+                print("❌ error: \(error.localizedDescription)")
+            }
+        }
     }
     
-    func tapLike(id: String, isLiked: Bool) async throws {
-        if isLiked {
-            try await likeService.unlike(postId: id)
-        } else {
-            try await likeService.like(postId: id)
+    func tapLike(id: String, isLiked: Bool) {
+        Task {
+            do {
+                if isLiked {
+                    try await likeService.unlike(postId: id)
+                } else {
+                    try await likeService.like(postId: id)
+                }
+            } catch NetworkError.accessDenied {
+                NotificationCenter.default.post(name: .loginRequired, object: nil)
+            } catch {
+                print("❌ error: \(error.localizedDescription)")
+            }
         }
     }
     

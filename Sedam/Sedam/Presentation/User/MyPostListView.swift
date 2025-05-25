@@ -9,9 +9,6 @@ import SwiftUI
 
 struct MyPostListView: View {
     @EnvironmentObject var viewModel: UserViewModel
-    @EnvironmentObject var authViewModel: AuthViewModel
-    
-    @State var showLogInPopUp: Bool = false
     
     var body: some View {
         ZStack {
@@ -30,34 +27,7 @@ struct MyPostListView: View {
             Spacer()
         }
         .onAppear {
-            showLogInPopUp = false
-            Task { @MainActor in
-                do {
-                    try await viewModel.fetchMyPostList()
-                } catch NetworkError.accessDenied {
-                    withAnimation {
-                        showLogInPopUp = true
-                    }
-                } catch {
-                    print("❌ error : \(error.localizedDescription)")
-                }
-            }
-        }
-        .overlay {
-            if showLogInPopUp {
-                CustomPopUpView(
-                    showPopUp: $showLogInPopUp,
-                    title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
-                    leftButtonText: "취소",
-                    rightButtonText: "확인",
-                    leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: {
-                        authViewModel.authenticationState = .splash
-                        showLogInPopUp = false
-                    }
-                )
-            }
+            viewModel.fetchMyPostList()
         }
     }
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MyPageView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var viewModel: UserViewModel
     @State var showSignOutPopUp: Bool = false
     @State var showLogOutPopUp: Bool = false
     
@@ -18,7 +19,7 @@ struct MyPageView: View {
                 .ignoresSafeArea()
             
             VStack {
-                UserCardView()
+                UserCardView(name: $viewModel.name)
                     .padding(.horizontal, 16)
                     .frame(height: 100)
                 SettingCardView(showSignOutPopUp: $showSignOutPopUp, showLogOutPopUp: $showLogOutPopUp)
@@ -59,8 +60,8 @@ struct MyPageView: View {
     }
 }
 
-struct MyPageView_Previews: PreviewProvider {
-  static var previews: some View {
-    MyPageView()
-  }
-}
+//struct MyPageView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    MyPageView()
+//  }
+//}

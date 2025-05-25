@@ -55,18 +55,7 @@ struct PostUpdateView: View {
                 )
                 MainButton(title: "등록", font: .pretendardSemiBold18, color: .dadsCoupe)
                     .tap() {
-                        Task { @MainActor in
-                            do {
-                                try await viewModel.updatePost(title: title, content: content, id: postId)
-                                router.pop()
-                            } catch NetworkError.accessDenied {
-                                withAnimation {
-                                    showLogInPopUp = true
-                                }
-                            } catch {
-                                print("❌ error: \(error.localizedDescription)")
-                            }
-                        }
+                        viewModel.updatePost(title: title, content: content, id: postId)
                     }
                     .padding(.horizontal, 24)
             }
@@ -75,22 +64,6 @@ struct PostUpdateView: View {
         .task {
             Task { @MainActor in
                 self.post = try await viewModel.fetchPostDetail(id: postId)
-            }
-        }
-        .overlay {
-            if showLogInPopUp {
-                CustomPopUpView(
-                    showPopUp: $showLogInPopUp,
-                    title: "로그인",
-                    message: "로그인이 필요한 서비스입니다.\n\n로그인 하시겠습니까?",
-                    leftButtonText: "취소",
-                    rightButtonText: "확인",
-                    leftButtonAction: { withAnimation { showLogInPopUp = false }},
-                    rightButtonAction: {
-                        authViewModel.authenticationState = .splash
-                        showLogInPopUp = false
-                    }
-                )
             }
         }
     }
