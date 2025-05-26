@@ -36,5 +36,9 @@ struct PostDetailBuilder <T: Decodable>: BuilderProtocol {
         path += "/\(id)"
         useAuthorization = true
         self.parameters = parameters
+        self.queries =
+        [
+            URLQueryItem(name: "timezone", value: TimeZone.current.identifier)
+        ]
     }
 }

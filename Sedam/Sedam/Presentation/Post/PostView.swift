@@ -30,18 +30,11 @@ struct PostView: View {
                 Text(post?.title ?? "")
                     .font(.maruburiRegular24)
                     .padding(.vertical, 8)
-                LogoView(size: 10)
                 if isMyPost {
                     HStack {
                         Button {
-                            Task { @MainActor in
-                                do {
-                                    try await viewModel.deletePost(id: postId)
-                                    router.pop()
-                                } catch {
-                                    print("❌ error: \(error.localizedDescription)")
-                                }
-                            }
+                            viewModel.deletePost(id: postId)
+                            router.pop()
                         } label: {
                             Image(systemName: "trash")
                                 .resizable()
@@ -71,15 +64,9 @@ struct PostView: View {
                 }
                 LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
                     .tap {
-                        Task {
-                            try await viewModel.tapLike(id: postId, isLiked: isLiked)
-                            if isLiked {
-                                self.isLiked = false
-                            } else {
-                                self.isLiked = true
-                            }
-                            self.post = try await viewModel.fetchPostDetail(id: postId)
-                        }
+                        viewModel.tapLike(id: postId, isLiked: isLiked)
+                        //TODO: - 로직 수정 필요 (성공 시 toggle)
+                        isLiked.toggle()
                     }
             }
         }

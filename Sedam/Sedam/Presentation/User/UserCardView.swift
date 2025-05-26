@@ -9,14 +9,14 @@ import SwiftUI
 
 struct UserCardView: View {
     @EnvironmentObject var router: Router
-    @EnvironmentObject var viewModel: UserViewModel
+    @Binding var name: String
     
     var body: some View {
         VStack {
             Button {
                 //user nickname 변경
             } label: {
-                Text(viewModel.name)
+                Text(name)
                     .font(.danjoBold24)
                     .foregroundStyle(.white)
             }

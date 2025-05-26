@@ -72,11 +72,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		927900062DBBAF6C00C0FD0A /* SedamTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = SedamTests;
-			sourceTree = "<group>";
-		};
 		9279018F2DBBB63600C0FD0A /* SedamTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = SedamTests;
@@ -122,7 +117,6 @@
 			children = (
 				92A0B3C62DCCB2BE009A3A7B /* SedamTests.xctestplan */,
 				92FB14092DB8B96400ABAD64 /* Sedam */,
-				927900062DBBAF6C00C0FD0A /* SedamTests */,
 				9279018F2DBBB63600C0FD0A /* SedamTests */,
 				E174C3D52DBE4CAE0064CEB8 /* Frameworks */,
 				92FB14082DB8B96400ABAD64 /* Products */,
@@ -162,7 +156,6 @@
 				927901932DBBB63600C0FD0A /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				927900062DBBAF6C00C0FD0A /* SedamTests */,
 				9279018F2DBBB63600C0FD0A /* SedamTests */,
 			);
 			name = SedamTests;

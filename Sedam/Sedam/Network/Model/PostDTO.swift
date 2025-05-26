@@ -33,9 +33,9 @@ struct PostDTO: Decodable {
     private let isoFormatter: DateFormatter = {
         let formatter = DateFormatter()
         // 1) 고정 포맷 파싱용 POSIX 로케일
-        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.locale = Locale.current
         // 2) 서버 문자열이 UTC 기준이라면 그대로
-        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.timeZone = .current
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS"
         
         return formatter
