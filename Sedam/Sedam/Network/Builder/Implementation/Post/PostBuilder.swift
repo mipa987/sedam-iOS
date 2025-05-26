@@ -28,7 +28,8 @@ struct PostBuilder <T: Decodable> : BuilderProtocol {
             URLQueryItem(name: "sort_by", value: sort),
             URLQueryItem(name: "order", value: order),
             URLQueryItem(name: "start_date", value: startDate),
-            URLQueryItem(name: "end_date", value: endDate)
+            URLQueryItem(name: "end_date", value: endDate),
+            URLQueryItem(name: "timezone", value: TimeZone.current.identifier)
         ]
     }
     
@@ -36,5 +37,9 @@ struct PostBuilder <T: Decodable> : BuilderProtocol {
         method = httpMethod
         self.parameters = parameters
         useAuthorization = true
+        self.queries =
+        [
+            URLQueryItem(name: "timezone", value: TimeZone.current.identifier)
+        ]
     }
 }

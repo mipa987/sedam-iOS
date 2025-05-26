@@ -9,3 +9,8 @@ enum BaseURLType: String {
     case production = "https://sedam.ddns.net"
     case qa = "https://sedam-backend.onrender.com"
 }
+
+enum BaseURLType2: Hashable {
+    case production
+    case qa
+}

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct RouterView<Content: View>: View {
     @StateObject var router: Router = Router()
-    @EnvironmentObject var postViewModel: PostViewModel
     
     private let content: Content
     
@@ -43,4 +42,3 @@ struct RouterView<Content: View>: View {
         .environmentObject(router)
     }
 }
-

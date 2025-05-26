@@ -64,8 +64,11 @@ final class PostService {
     }
     
     //정렬 기준에 따라 내 post 불러오기
-    func fetchMyPostList(sortBy: SortType, order: OrderType, startDate: String? = nil, endDate: String? = nil) async throws -> [PostDTO] {
-        let builder = MyPostBuilder(sort: sortBy.name, order: order.name, startDate: startDate, endDate: endDate)
+    func fetchMyPostList(sortBy: SortType, order: OrderType, startDate: Date, endDate: Date = .now) async throws -> [PostDTO] {
+        let startDateString = dateFormatter.string(from: startDate)
+        let endDateString = dateFormatter.string(from: endDate)
+        
+        let builder = MyPostBuilder(sort: sortBy.name, order: order.name, startDate: startDateString, endDate: endDateString)
         
         return try await networkManager.fetchData(builder)
     }
