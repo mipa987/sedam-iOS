@@ -66,5 +66,11 @@ struct PostUpdateView: View {
                 self.post = try await viewModel.fetchPostDetail(id: postId)
             }
         }
+        .onReceive(viewModel.postUpdatedPublisher) { _ in
+            router.pop()
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare() 
+            generator.impactOccurred()
+        }
     }
 }

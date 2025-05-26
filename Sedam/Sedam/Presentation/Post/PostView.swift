@@ -34,7 +34,6 @@ struct PostView: View {
                     HStack {
                         Button {
                             viewModel.deletePost(id: postId)
-                            router.pop()
                         } label: {
                             Image(systemName: "trash")
                                 .resizable()
@@ -78,6 +77,9 @@ struct PostView: View {
                     isMyPost = true
                 }
             }
+        }
+        .onReceive(viewModel.postDeletedPublisher) { _ in
+            router.pop()
         }
     }
 }
