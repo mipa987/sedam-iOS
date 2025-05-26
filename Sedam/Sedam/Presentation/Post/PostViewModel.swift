@@ -19,6 +19,21 @@ class PostViewModel: ObservableObject {
     private let postService = PostService.shared
     private let likeService = LikeService.shared
     private let wordService = TodayWordService.shared
+    private let postCreatedSubject = PassthroughSubject<Void, Never>()
+    private let postDeletedSubject = PassthroughSubject<Void, Never>()
+    private let postUpdateSubject = PassthroughSubject<Void, Never>()
+    
+    var postCreatedPublisher: AnyPublisher<Void, Never> {
+        postCreatedSubject.eraseToAnyPublisher()
+    }
+    
+    var postDeletedPublisher: AnyPublisher<Void, Never> {
+        postDeletedSubject.eraseToAnyPublisher()
+    }
+    
+    var postUpdatedPublisher: AnyPublisher<Void, Never> {
+        postUpdateSubject.eraseToAnyPublisher()
+    }
     
     init() {
         getTodayWords(by: .now)
@@ -67,6 +82,7 @@ class PostViewModel: ObservableObject {
                 _ = try await postService.updateOnePost(id: id, title: title, content: content)
 //                return publisher.map(true)
                 //TODO: 성공시 성공했다고 반환, router.pop() 필요 (진동과 함께)
+                postUpdateSubject.send()
             } catch NetworkError.accessDenied {
                 NotificationCenter.default.post(name: .loginRequired, object: nil)
             } catch {
@@ -79,6 +95,7 @@ class PostViewModel: ObservableObject {
         Task {
             do {
                 try await postService.createPost(title: title, content: content)
+                postCreatedSubject.send()
             } catch NetworkError.accessDenied {
                 NotificationCenter.default.post(name: .loginRequired, object: nil)
             } catch {
@@ -91,6 +108,7 @@ class PostViewModel: ObservableObject {
         Task {
             do {
                 _ = try await postService.deleteOnePost(id: id)
+                postDeletedSubject.send()
             } catch NetworkError.accessDenied {
                 NotificationCenter.default.post(name: .loginRequired, object: nil)
             } catch {

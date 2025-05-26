@@ -65,6 +65,12 @@ struct PostCreateView: View {
             }
             Spacer()
         }
+        .onReceive(viewModel.postCreatedPublisher) { _ in
+            router.pop()
+            let generator = UIImpactFeedbackGenerator(style: .medium)
+            generator.prepare()
+            generator.impactOccurred()
+        }
     }
 }
 
