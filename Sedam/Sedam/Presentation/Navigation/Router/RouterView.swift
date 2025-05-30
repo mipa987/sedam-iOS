@@ -31,6 +31,8 @@ struct RouterView<Content: View>: View {
                         PostUpdateView(title: title, content: content, postId: id)
                     case .postDetail(let id):
                         PostView(postId: id)
+                    case .sharePost(let title, let content, let words):
+                        PostShareView(title: title, content: content, words: words)
                     case .myPostList:
                         MyPostListView()
                     }
