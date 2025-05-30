@@ -29,7 +29,7 @@ struct SinglePopUpView: View {
                 
                 Text(message)
                     .multilineTextAlignment(.center)
-                    .padding(12)
+                    .padding(.vertical, 12)
                     .font(.maruburiRegular14)
                 
                 Button {
@@ -38,18 +38,18 @@ struct SinglePopUpView: View {
                     Text(buttonText)
                         .font(.pretendardSemiBold14)
                         .foregroundStyle(.white)
-                        .padding(8)
+                        .padding(.vertical, 12)
+                        .frame(width: 200)
                 }
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .foregroundStyle(.juniperBerries)
                 )
-                .frame(height: 44)
                 .padding(.bottom, 12)
             }
+            .frame(width: 300)
             .background(.modernIvory)
             .roundedCorner(16, corners: .allCorners)
-            .padding(.horizontal, 20)
         }
         .ignoresSafeArea(.all)
     }

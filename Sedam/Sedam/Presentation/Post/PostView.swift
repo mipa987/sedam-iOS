@@ -51,6 +51,17 @@ struct PostView: View {
                                 .frame(width: 15)
                                 .foregroundStyle(.black)
                         }
+                        
+                        Button {
+                            print("share post")
+                            router.push(.sharePost(title: post?.title ?? "", content: post?.content ?? "", words: post?.todayWords.joined(separator: ", ") ?? ""))
+                        } label: {
+                            Image(systemName: "square.and.arrow.up")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 15)
+                                .foregroundStyle(.black)
+                        }
                     }
                 }
                 Spacer()

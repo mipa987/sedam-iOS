@@ -80,7 +80,7 @@ class PostViewModel: ObservableObject {
         Task {
             do {
                 _ = try await postService.updateOnePost(id: id, title: title, content: content)
-//                return publisher.map(true)
+                //                return publisher.map(true)
                 //TODO: 성공시 성공했다고 반환, router.pop() 필요 (진동과 함께)
                 postUpdateSubject.send()
             } catch NetworkError.accessDenied {
