@@ -31,8 +31,8 @@ struct PostShareView: View {
                 fontColors: $fontColors,
                 isThreeWords: $isThreeWords
             )
-            .frame(minWidth: 300, minHeight: 300)
             .roundedCorner(16, corners: .allCorners)
+            .padding(12)
             Toggle("3단어 표시", isOn: $isThreeWords)
                 .padding(.horizontal, 120)
                 .font(.pretendardSemiBold14)
@@ -85,7 +85,7 @@ struct PostShareView: View {
                     }
                 }
                 .padding(.horizontal, 16)
-            MainButton(title: "이미지 공유하기", font: .pretendardSemiBold14, color: .dadsCoupe)
+            MainButton(title: "이미지 저장하기", font: .pretendardSemiBold14, color: .dadsCoupe)
                 .tap {
                     let image = CardView (
                         title: title,
