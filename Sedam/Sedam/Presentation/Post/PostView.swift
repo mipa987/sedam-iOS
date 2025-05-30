@@ -12,9 +12,9 @@ struct PostView: View {
     @EnvironmentObject var viewModel: PostViewModel
     @EnvironmentObject var userViewModel: UserViewModel
     
-    @State var post: PostDTO?
     @State var isLiked: Bool = false
     @State var isMyPost: Bool = false
+    @State var showDeleteCheckPopUp: Bool = false
     var postId: String
     
     var body: some View {
@@ -25,41 +25,43 @@ struct PostView: View {
             VStack(alignment: .center) {
                 Spacer()
                 LogoView(size: 10)
-                Text(post?.todayWords.joined(separator: ", ") ?? "")
+                Text(viewModel.detailPost?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
-                Text(post?.title ?? "")
+                Text(viewModel.detailPost?.title ?? "")
                     .font(.maruburiRegular24)
                     .padding(.vertical, 8)
                 if isMyPost {
-                    HStack {
+                    HStack(spacing: 12) {
                         Button {
-                            viewModel.deletePost(id: postId)
+                            withAnimation {
+                                showDeleteCheckPopUp = true
+                            }
                         } label: {
                             Image(systemName: "trash")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 15)
+                                .frame(width: 16)
                                 .foregroundStyle(.black)
                         }
                         Button {
                             print("update post")
-                            router.push(.updatePost(id: postId, title: post?.title ?? "", content: post?.content ?? ""))
+                            router.push(.updatePost(id: postId, title: viewModel.detailPost?.title ?? "", content: viewModel.detailPost?.content ?? ""))
                         } label: {
                             Image(systemName: "pencil.line")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 15)
+                                .frame(width: 16)
                                 .foregroundStyle(.black)
                         }
                         
                         Button {
                             print("share post")
-                            router.push(.sharePost(title: post?.title ?? "", content: post?.content ?? "", words: post?.todayWords.joined(separator: ", ") ?? ""))
+                            router.push(.sharePost(title: viewModel.detailPost?.title ?? "", content: viewModel.detailPost?.content ?? "", words: viewModel.detailPost?.todayWords.joined(separator: ", ") ?? ""))
                         } label: {
                             Image(systemName: "square.and.arrow.up")
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
-                                .frame(width: 15)
+                                .frame(width: 14)
                                 .foregroundStyle(.black)
                         }
                     }
@@ -67,30 +69,52 @@ struct PostView: View {
                 Spacer()
                     .frame(height: 20)
                 ScrollView {
-                    Text(post?.content ?? "")
+                    Text(viewModel.detailPost?.content ?? "")
                         .font(.maruburiRegular14)
                         .lineSpacing(12)
                         .padding(.horizontal, 20)
                 }
-                LikeButton(isTapped: $isLiked, count: post?.likes ?? 0, color: .tranquility)
+                LikeButton(isTapped: $viewModel.isLiked, count: viewModel.detailPost?.likes ?? 0, color: .tranquility)
                     .tap {
-                        viewModel.tapLike(id: postId, isLiked: isLiked)
-                        //TODO: - 로직 수정 필요 (성공 시 toggle)
-                        isLiked.toggle()
+                        Task {
+                            try await viewModel.toggleLike()
+                        }
                     }
             }
         }
         .task {
             Task { @MainActor in
-                self.post = try await viewModel.fetchPostDetail(id: postId)
+                try await viewModel.fetchPostDetail(id: postId)
                 self.isLiked = try await viewModel.isLiked(id: postId)
-                if post?.userNickname == userViewModel.name {
+                if viewModel.detailPost?.userNickname == userViewModel.name {
                     isMyPost = true
                 }
             }
         }
         .onReceive(viewModel.postDeletedPublisher) { _ in
             router.pop()
+        }
+        .overlay {
+            if showDeleteCheckPopUp {
+                CustomPopUpView(
+                    showPopUp: $showDeleteCheckPopUp,
+                    title: "정말 삭제하시겠어요?",
+                    message: "삭제하시면 되돌릴 수 없어요!\n\n정말 삭제하시겠어요?",
+                    leftButtonText: "취소",
+                    rightButtonText: "확인",
+                    leftButtonAction: {
+                        withAnimation {
+                            showDeleteCheckPopUp = false
+                        }
+                    },
+                    rightButtonAction: {
+                        viewModel.deletePost(id: postId)
+                        withAnimation {
+                            showDeleteCheckPopUp = false
+                        }
+                    }
+                )
+            }
         }
     }
 }

@@ -15,6 +15,8 @@ class PostViewModel: ObservableObject {
     @Published var errorMessage: String?
     @Published var todayWords: [String] = []
     @Published var postListType = PostListType()
+    @Published var detailPost: PostDTO?
+    @Published var isLiked: Bool = false
     
     private let postService = PostService.shared
     private let likeService = LikeService.shared
@@ -72,8 +74,19 @@ class PostViewModel: ObservableObject {
         }
     }
     
-    func fetchPostDetail(id: String) async throws -> PostDTO {
-        return try await postService.fetchOnePost(id: id)
+    func fetchPostDetail(id: String) async throws {
+        self.detailPost = try await postService.fetchOnePost(id: id)
+        self.isLiked = try await isLiked(id: id)
+    }
+    
+    func toggleLike() async throws {
+        guard let post = detailPost else {
+            return
+        }
+        
+        tapLike(id: post.id, isLiked: isLiked)
+        isLiked.toggle()
+        detailPost?.likes += isLiked ? 1 : -1
     }
     
     func updatePost(title: String, content: String, id: String) {
