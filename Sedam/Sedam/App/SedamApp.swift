@@ -10,6 +10,7 @@ import Supabase
 
 @main
 struct SedamApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @State private var showUpdatePopUp: Bool = false
     
     init() {
