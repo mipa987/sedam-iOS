@@ -8,10 +8,11 @@
 import Foundation
 
 final class LikeService {
-    static let shared = LikeService()
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
 
-    private init() {}
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
 
     // ✅ 좋아요 누르기
     func like(postId: String) async throws {

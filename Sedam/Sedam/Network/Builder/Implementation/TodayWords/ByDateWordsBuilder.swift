@@ -10,7 +10,6 @@ import Foundation
 struct ByDateWordsBuilder: BuilderProtocol {
     typealias Response = [String]
     
-    var baseURL: BaseURLType { .production }
     var path: String = PathURLType.todayWordByDate.path()
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }

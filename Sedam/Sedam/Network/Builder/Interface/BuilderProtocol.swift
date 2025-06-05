@@ -9,8 +9,7 @@ import Foundation
 
 protocol BuilderProtocol {
     associatedtype Response: Decodable
-
-    var baseURL: BaseURLType { get }
+    
     var path: String { get }
     var queries: [URLQueryItem]? { get }
     var method: HTTPMethod { get }

@@ -8,8 +8,7 @@
 import Foundation
 
 final class TodayWordService {
-    static let shared = TodayWordService()
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -17,6 +16,10 @@ final class TodayWordService {
         return formatter
     }()
 
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
+    
     func fetchTodayWords() async throws -> [String] {
         let builder = TodayWordsBuilder()
         

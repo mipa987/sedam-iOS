@@ -10,7 +10,6 @@ import Foundation
 struct AllTermsBuilder: BuilderProtocol {
     typealias Response = ResponseDTO
     
-    var baseURL: BaseURLType { .production }
     var path: String = PathURLType.terms.path()
     var queries: [URLQueryItem]? = nil
     var method: HTTPMethod { .get }

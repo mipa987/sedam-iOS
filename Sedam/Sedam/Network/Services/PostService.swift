@@ -37,14 +37,17 @@ enum OrderType {
 }
 
 final class PostService {
-    static let shared = PostService()
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
         
         return formatter
     }()
+
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
     
     //정렬 기준에 따라 모든 post 불러오기
     func fetchPostList(sortBy: SortType, order: OrderType, startDate: Date = .now, endDate: Date = .now) async throws -> [PostDTO] {

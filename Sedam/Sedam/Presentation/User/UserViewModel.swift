@@ -12,7 +12,9 @@ class UserViewModel: ObservableObject {
     @Published var name: String = "손님"
     @Published var myPostList: [PostDTO] = []
     
-    private let postService = PostService.shared
+    private let networkManager: NetworkManager
+    private let postService: PostService
+    private let userService: UserService
     private let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -21,15 +23,21 @@ class UserViewModel: ObservableObject {
         return formatter
     }()
     
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+        self.postService = PostService(networkManager: networkManager)
+        self.userService = UserService(networkManager: networkManager)
+    }
+    
     @MainActor
     func setNickname() async throws {
-        name = try await UserService.shared.createRandomNickname()
+        name = try await userService.createRandomNickname()
     }
     
     func fetchUserNickname() {
         Task {
             do {
-                name = try await UserService.shared.fetchNickname()
+                name = try await userService.fetchNickname()
             } catch {
                 name = "손님"
                 print("❌ error: \(error.localizedDescription)")

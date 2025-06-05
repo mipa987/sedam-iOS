@@ -18,12 +18,22 @@ class PostViewModel: ObservableObject {
     @Published var detailPost: PostDTO?
     @Published var isLiked: Bool = false
     
-    private let postService = PostService.shared
-    private let likeService = LikeService.shared
-    private let wordService = TodayWordService.shared
+    private let networkManager: NetworkManager
+    private let postService: PostService
+    private let likeService: LikeService
+    private let wordService: TodayWordService
     private let postCreatedSubject = PassthroughSubject<Void, Never>()
     private let postDeletedSubject = PassthroughSubject<Void, Never>()
     private let postUpdateSubject = PassthroughSubject<Void, Never>()
+    
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+        self.postService = PostService(networkManager: networkManager)
+        self.likeService = LikeService(networkManager: networkManager)
+        self.wordService = TodayWordService(networkManager: networkManager)
+        getTodayWords(by: .now)
+        fetchPostList(sortBy: postListType.sort, order: postListType.order)
+    }
     
     var postCreatedPublisher: AnyPublisher<Void, Never> {
         postCreatedSubject.eraseToAnyPublisher()
@@ -35,11 +45,6 @@ class PostViewModel: ObservableObject {
     
     var postUpdatedPublisher: AnyPublisher<Void, Never> {
         postUpdateSubject.eraseToAnyPublisher()
-    }
-    
-    init() {
-        getTodayWords(by: .now)
-        fetchPostList(sortBy: postListType.sort, order: postListType.order)
     }
     
     func togglePostListType() {

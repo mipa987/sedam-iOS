@@ -8,8 +8,11 @@
 import Foundation
 
 class UserService {
-    static let shared = UserService()
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
+
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
     
     func createRandomNickname() async throws -> String {
         let builder = NicknameCreateBuilder()

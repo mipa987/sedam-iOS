@@ -2,9 +2,12 @@ import Foundation
 import Supabase
 
 class TermsService {
-    static let shared = TermsService()
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
     private let supabase = SupabaseManager.shared.supabase
+
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+    }
     
     func hasAgreed(to term: TermName) async throws -> Bool {
         let builder = CheckTermsAgreeBuilder(termTitle: term.name)

@@ -9,6 +9,12 @@ import Foundation
 import Supabase
 
 class NetworkManager {
+    private var baseURL: URL
+    
+    init(baseURL: URL) {
+        self.baseURL = baseURL
+    }
+    
     // MARK: - Public
     func fetchData<Builder: BuilderProtocol>(_ builder: Builder, isRetry: Bool = false) async throws -> Builder.Response {
         let request = try await makeRequest(builder)
@@ -41,12 +47,13 @@ class NetworkManager {
     
     // MARK: - Private
     private func makeRequest<Builder: BuilderProtocol>(_ builder: Builder) async throws -> URLRequest {
-        guard let baseURL = URL(string: builder.baseURL.rawValue) else {
+        let fullURL = baseURL.appendingPathComponent(builder.path)
+        var components = URLComponents(url: fullURL, resolvingAgainstBaseURL: false)
+        components?.queryItems = builder.queries
+        
+        guard let url = components?.url else {
             throw NetworkError.urlNotFound
         }
-        
-        var url = baseURL.appendingPathComponent(builder.path)
-        url.append(queryItems: builder.queries ?? [])
         
         var request = URLRequest(url: url)
         builder.headers.forEach { (key, value) in

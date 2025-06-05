@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AuthenticatedView: View {
-    @StateObject private var authViewModel: AuthViewModel = AuthViewModel()
-    @StateObject var postViewModel: PostViewModel = PostViewModel()
-    @StateObject var userViewModel: UserViewModel = UserViewModel()
+    @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject var postViewModel: PostViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
     
     var body: some View {
         RouterView {
@@ -28,9 +28,6 @@ struct AuthenticatedView: View {
                     TermView(isButtonEnabled: true)
                 }
         }
-        .environmentObject(postViewModel)
-        .environmentObject(authViewModel)
-        .environmentObject(userViewModel)
         .onOpenURL { url in
             Task {
                 // Apple/Kakao 로그인 콜백을 세션으로 변환

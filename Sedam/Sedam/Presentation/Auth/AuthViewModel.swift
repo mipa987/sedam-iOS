@@ -11,9 +11,10 @@ import Supabase
 
 @MainActor
 class AuthViewModel: ObservableObject {
+    private let networkManager: NetworkManager
     private let apple = AppleAuthManager()
     private let kakao = KakaoAuthManager()
-    private let term = TermsService.shared
+    private let term: TermsService
     private let client = SupabaseManager.shared.supabase
     
     @Published var authenticationState: AuthenticationState = .splash {
@@ -37,7 +38,10 @@ class AuthViewModel: ObservableObject {
     
     private var cancellables = Set<AnyCancellable>()
     
-    init() {
+    init(networkManager: NetworkManager) {
+        self.networkManager = networkManager
+        self.term = TermsService(networkManager: networkManager)
+        
         updatePresentationFlags()
         NotificationCenter.default
             .publisher(for: .loginRequired)
@@ -67,7 +71,7 @@ class AuthViewModel: ObservableObject {
                     KeyChainModule.create(key: .accessToken, data: session.accessToken)
                     KeyChainModule.create(key: .refreshToken, data: session.refreshToken)
                     
-                    self.istermsAgree = try await TermsService.shared.hasAgreed(to: .privacyPolicy)
+                    self.istermsAgree = try await TermsService(networkManager: networkManager).hasAgreed(to: .privacyPolicy)
                     
                     if self.istermsAgree {
                         self.authenticationState = .signIn
@@ -125,7 +129,7 @@ class AuthViewModel: ObservableObject {
     func signOut() {
         Task {
             do {
-                try await UserService().deleteUser()
+                try await UserService(networkManager: networkManager).deleteUser()
                 KeyChainModule.delete(key: .accessToken)
                 KeyChainModule.delete(key: .refreshToken)
                 authenticationState = .splash
@@ -152,7 +156,7 @@ class AuthViewModel: ObservableObject {
         Task {
             do {
                 try await term.agree(to: termName)
-                _ = try await UserService.shared.createRandomNickname()
+                _ = try await UserService(networkManager: networkManager).createRandomNickname()
                 authenticationState = .signIn
             } catch {
                 print("❌ error: \(error.localizedDescription)")

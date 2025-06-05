@@ -9,6 +9,15 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var isLaunch: Bool = true
+    private let baseURL: BaseURLType = .production
+    
+    private var networkManager: NetworkManager {
+        guard let url = URL(string: baseURL.rawValue) else {
+            fatalError("Invalid base URL")
+        }
+        
+        return NetworkManager(baseURL: url)
+    }
     
     var body: some View {
         if isLaunch {
@@ -22,6 +31,9 @@ struct ContentView: View {
                 }
         } else {
             AuthenticatedView()
+                .environmentObject(AuthViewModel(networkManager: networkManager))
+                .environmentObject(PostViewModel(networkManager: networkManager))
+                .environmentObject(UserViewModel(networkManager: networkManager))
         }
     }
 }
