@@ -12,7 +12,6 @@ struct PostUpdateView: View {
     @EnvironmentObject var viewModel: PostViewModel
     @EnvironmentObject var authViewModel: AuthViewModel
     
-    @State var post: PostDTO?
     @State var title: String
     @State var content: String
     @State var showLogInPopUp: Bool = false
@@ -30,7 +29,7 @@ struct PostUpdateView: View {
             
             VStack(alignment: .center) {
                 LogoView(size: 10)
-                Text(post?.todayWords.joined(separator: ", ") ?? "")
+                Text(viewModel.detailPost?.todayWords.joined(separator: ", ") ?? "")
                     .font(.danjoBold14)
                 TextField(title, text: $title)
                     .font(.maruburiRegular24)
@@ -63,7 +62,7 @@ struct PostUpdateView: View {
         }
         .task {
             Task { @MainActor in
-                self.post = try await viewModel.fetchPostDetail(id: postId)
+                try await viewModel.fetchPostDetail(id: postId)
             }
         }
         .onReceive(viewModel.postUpdatedPublisher) { _ in
